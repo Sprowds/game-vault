@@ -1,0 +1,19 @@
+.sidebar {
+  padding-right: 50px;
+
+  font-weight: 600;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.item {
+  transition: 0.2s;
+}
+
+.item:hover {
+  color: #cfcbcb;
+}

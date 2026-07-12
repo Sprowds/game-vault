@@ -1,0 +1,25 @@
+.addGameForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  padding: 30px;
+
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: 1px solid #000;
+}
+
+.notActive {
+  display: none;
+}
+
+.title {
+  font-size: 30px;
+}

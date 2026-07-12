@@ -1,0 +1,50 @@
+.item {
+  padding: 10px;
+  border: 1px solid #c1cdff;
+  border-radius: 15px;
+  box-shadow: 10px 7px 12px rgba(9, 21, 31, 0.5);
+
+  transition: 0.2s;
+}
+
+.item:hover {
+  transform: scale(1.03);
+}
+
+.cover {
+  max-width: 250px;
+  border-radius: 20px;
+}
+
+.title {
+  margin-bottom: 15px;
+
+  text-align: center;
+}
+
+.platform {
+  margin-bottom: 5px;
+
+  font-weight: 600;
+}
+
+.status {
+  margin-bottom: 10px;
+
+  font-style: italic;
+}
+
+.rating__wrapper {
+  display: flex;
+  justify-content: end;
+  gap: 4px;
+}
+
+.rating {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.icon {
+  max-width: 10px;
+}

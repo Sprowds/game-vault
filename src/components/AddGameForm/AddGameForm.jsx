@@ -1,0 +1,101 @@
+import classes from "./AddGameForm.module.css";
+import SelectDropdown from "../../ui/SelectDropdown/SelectDropdown";
+import platformList from "../../data/platformList.json";
+import statusList from "../../data/statusList.json";
+import { useState } from "react";
+
+const AddGameForm = ({
+  gameList,
+  setGameList,
+  setAddGameActive,
+  addGameActive,
+}) => {
+  const initialNewGameState = {
+    name: "",
+    platform: "Steam",
+    rating: 0,
+    status: "Playing",
+    cover: "",
+  };
+  const [newGame, setNewGame] = useState(initialNewGameState);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setNewGame((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  return (
+    <form
+      className={
+        addGameActive === true ? classes.addGameForm : classes.notActive
+      }
+      onSubmit={(event) => {
+        event.preventDefault();
+        setAddGameActive(false);
+        setGameList((prev) => [
+          ...prev,
+          {
+            id: gameList.length + 1,
+            ...newGame,
+            rating: Number(newGame.rating),
+          },
+        ]);
+        setNewGame(initialNewGameState);
+      }}
+    >
+      <h3 className={classes.title}>Add Game</h3>
+      <div className="name">
+        <label htmlFor="gameName">Name</label>
+        <input
+          type="text"
+          name="name"
+          value={newGame.name}
+          onChange={handleChange}
+        />
+      </div>
+      <SelectDropdown
+        value={newGame.platform}
+        name="platform"
+        options={Object.keys(platformList)}
+        onChange={handleChange}
+      />
+      <div className="rating">
+        <label htmlFor="ratingEnter">Rating</label>
+        <input
+          type="number"
+          id="ratingEnter"
+          name="rating"
+          value={newGame.rating}
+          onChange={handleChange}
+          min="1"
+          max="5"
+        />
+      </div>
+      <SelectDropdown
+        value={newGame.status}
+        name="status"
+        options={Object.values(statusList)}
+        onChange={handleChange}
+      />
+      <div className="cover">
+        <label htmlFor="coverURL">Cover</label>
+        <input
+          type="text"
+          id="coverURL"
+          name="cover"
+          value={newGame.cover}
+          onChange={handleChange}
+        />
+      </div>
+      <button className={classes.btn} type="submit">
+        Create
+      </button>
+    </form>
+  );
+};
+
+export default AddGameForm;

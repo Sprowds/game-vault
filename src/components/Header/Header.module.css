@@ -1,0 +1,25 @@
+.header {
+  padding: 20px 0;
+  background-color: rgb(39, 89, 133);
+
+  font-weight: 700;
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  transition: 0.3s;
+
+  font-size: 30px;
+}
+
+.logo span {
+  color: rgb(56, 167, 71);
+}
+
+.logo:hover {
+  transform: scale(1.2);
+}

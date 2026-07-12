@@ -1,0 +1,17 @@
+.list {
+  border: none;
+  padding: 3px 10px;
+
+  font-weight: 600;
+}
+
+.list:focus {
+  outline: none;
+  border: none;
+}
+
+.item {
+  width: 100px;
+
+  font-weight: 600;
+}

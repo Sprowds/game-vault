@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Dota 2",
+    "platform": "Steam",
+    "status": "Playing",
+    "rating": 5.0,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Counter Strike 2",
+    "platform": "Steam",
+    "status": "Playing",
+    "rating": 5.0,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Dark Souls III",
+    "platform": "Epic Games",
+    "status": "Completed",
+    "rating": 5.0,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Elden Ring",
+    "platform": "Steam",
+    "status": "Playing",
+    "rating": 3.96,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Lethal Company",
+    "platform": "Steam",
+    "status": "Dropped",
+    "rating": 5.0,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Dark Souls II",
+    "platform": "PlayStation",
+    "status": "Backlog",
+    "rating": 2.35,
+    "cover": "src/assets/img/dota.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Dark Souls Remastered",
+    "platform": "Steam",
+    "status": "Playing",
+    "rating": 5.0,
+    "cover": "src/assets/img/dota.jpg"
+  }
+]
