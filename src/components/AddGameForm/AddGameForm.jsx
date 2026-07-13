@@ -2,7 +2,7 @@ import classes from "./AddGameForm.module.css";
 import SelectDropdown from "../../ui/SelectDropdown/SelectDropdown";
 import platformList from "../../data/platformList.json";
 import statusList from "../../data/statusList.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const AddGameForm = ({
   gameList,
@@ -28,73 +28,90 @@ const AddGameForm = ({
     }));
   }
 
+  const isActive = addGameActive === true;
+
+  useEffect(() => {
+    document.body.classList.add("no_scroll");
+
+    return () => {
+      document.body.classList.remove("no_scroll");
+    };
+  }, []);
+
   return (
-    <form
-      className={
-        addGameActive === true ? classes.addGameForm : classes.notActive
-      }
-      onSubmit={(event) => {
-        event.preventDefault();
-        setAddGameActive(false);
-        setGameList((prev) => [
-          ...prev,
-          {
-            id: gameList.length + 1,
-            ...newGame,
-            rating: Number(newGame.rating),
-          },
-        ]);
-        setNewGame(initialNewGameState);
-      }}
-    >
-      <h3 className={classes.title}>Add Game</h3>
-      <div className="name">
-        <label htmlFor="gameName">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={newGame.name}
+    <>
+      <div
+        className={classes.modal__overlay}
+        onClick={() => setAddGameActive(false)}
+      ></div>
+      <form
+        className={classes.addGameForm}
+        onSubmit={(event) => {
+          event.preventDefault();
+          setAddGameActive(false);
+          setGameList((prev) => [
+            ...prev,
+            {
+              id: gameList.length + 1,
+              ...newGame,
+              rating: Number(newGame.rating),
+            },
+          ]);
+          setNewGame(initialNewGameState);
+        }}
+      >
+        <h3 className={classes.title}>Add Game</h3>
+        <div className="name">
+          <label htmlFor="gameName">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={newGame.name}
+            onChange={handleChange}
+          />
+        </div>
+        <SelectDropdown
+          value={newGame.platform}
+          name="platform"
+          options={Object.keys(platformList)}
           onChange={handleChange}
         />
-      </div>
-      <SelectDropdown
-        value={newGame.platform}
-        name="platform"
-        options={Object.keys(platformList)}
-        onChange={handleChange}
-      />
-      <div className="rating">
-        <label htmlFor="ratingEnter">Rating</label>
-        <input
-          type="number"
-          id="ratingEnter"
-          name="rating"
-          value={newGame.rating}
-          onChange={handleChange}
-          min="1"
-          max="5"
-        />
-      </div>
-      <SelectDropdown
-        value={newGame.status}
-        name="status"
-        options={Object.values(statusList)}
-        onChange={handleChange}
-      />
-      <div className="cover">
-        <label htmlFor="coverURL">Cover</label>
-        <input
-          type="text"
-          id="coverURL"
-          name="cover"
-          value={newGame.cover}
+        <div className="rating">
+          <label htmlFor="ratingEnter">Rating</label>
+          <input
+            type="number"
+            id="ratingEnter"
+            name="rating"
+            value={newGame.rating}
+            onChange={handleChange}
+            min="1"
+            max="5"
+          />
+        </div>
+        <SelectDropdown
+          value={newGame.status}
+          name="status"
+          options={Object.values(statusList)}
           onChange={handleChange}
         />
-      </div>
-      <button className={classes.btn} type="submit">
-        Create
-      </button>
-    </form>
+        <div className="cover">
+          <label htmlFor="coverURL">Cover</label>
+          <input
+            type="text"
+            id="coverURL"
+            name="cover"
+            value={newGame.cover}
+            onChange={handleChange}
+          />
+        </div>
+        <button className={classes.btn} type="submit">
+          Create
+        </button>
+        <span className={classes.close} onClick={() => setAddGameActive(false)}>
+          x
+        </span>
+      </form>
+    </>
   );
 };
 

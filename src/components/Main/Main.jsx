@@ -21,12 +21,16 @@ const Main = () => {
       >
         Add game
       </button>
-      <AddGameForm
-        gameList={gameList}
-        setGameList={setGameList}
-        setAddGameActive={setAddGameActive}
-        addGameActive={addGameActive}
-      />
+      {addGameActive ? (
+        <AddGameForm
+          gameList={gameList}
+          setGameList={setGameList}
+          setAddGameActive={setAddGameActive}
+          addGameActive={addGameActive}
+        />
+      ) : (
+        <></>
+      )}
       <GameList gamesData={searchGame(gameList, search)} />
     </main>
   );

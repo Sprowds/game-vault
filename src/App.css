@@ -7,6 +7,10 @@ body {
   color: #fff;
 }
 
+.no_scroll {
+  overflow: hidden;
+}
+
 .content-wrapper {
   padding-top: 10px;
   display: flex;

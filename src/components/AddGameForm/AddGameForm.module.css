@@ -1,3 +1,15 @@
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  overflow: hidden;
+
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 .addGameForm {
   position: absolute;
   top: 50%;
@@ -7,7 +19,7 @@
   gap: 15px;
   align-items: center;
   transform: translate(-50%, -50%);
-  z-index: 10;
+  z-index: 1001;
 
   padding: 30px;
 
@@ -16,8 +28,11 @@
   border: 1px solid #000;
 }
 
-.notActive {
-  display: none;
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
 }
 
 .title {
