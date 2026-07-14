@@ -12,7 +12,8 @@
 }
 
 .cover {
-  max-width: 250px;
+  width: 250px;
+  aspect-ratio: 1;
   border-radius: 20px;
 }
 

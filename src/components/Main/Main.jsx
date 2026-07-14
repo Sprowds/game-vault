@@ -11,6 +11,17 @@ const Main = () => {
   const [gameList, setGameList] = useState(gamesData);
   const [addGameActive, setAddGameActive] = useState(false);
 
+  function addNewGame(newGame) {
+    setGameList((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        ...newGame,
+        rating: Number(newGame.rating),
+      },
+    ]);
+  }
+
   return (
     <main className={classes.main}>
       <h1 className={classes.title}>Library</h1>
@@ -23,10 +34,8 @@ const Main = () => {
       </button>
       {addGameActive ? (
         <AddGameForm
-          gameList={gameList}
-          setGameList={setGameList}
+          addNewGame={addNewGame}
           setAddGameActive={setAddGameActive}
-          addGameActive={addGameActive}
         />
       ) : (
         <></>

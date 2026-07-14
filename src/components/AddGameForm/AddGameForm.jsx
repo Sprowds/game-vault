@@ -4,12 +4,7 @@ import platformList from "../../data/platformList.json";
 import statusList from "../../data/statusList.json";
 import { useState, useEffect } from "react";
 
-const AddGameForm = ({
-  gameList,
-  setGameList,
-  setAddGameActive,
-  addGameActive,
-}) => {
+const AddGameForm = ({ addNewGame, setAddGameActive }) => {
   const initialNewGameState = {
     name: "",
     platform: "Steam",
@@ -27,8 +22,6 @@ const AddGameForm = ({
       [name]: value,
     }));
   }
-
-  const isActive = addGameActive === true;
 
   useEffect(() => {
     document.body.classList.add("no_scroll");
@@ -49,14 +42,8 @@ const AddGameForm = ({
         onSubmit={(event) => {
           event.preventDefault();
           setAddGameActive(false);
-          setGameList((prev) => [
-            ...prev,
-            {
-              id: gameList.length + 1,
-              ...newGame,
-              rating: Number(newGame.rating),
-            },
-          ]);
+
+          addNewGame(newGame);
           setNewGame(initialNewGameState);
         }}
       >
