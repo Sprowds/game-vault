@@ -2,7 +2,7 @@ import classes from "./GameCard.module.css";
 import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
 
-const GameCard = ({ gameData }) => {
+const GameCard = ({ gameData, deleteGame }) => {
   let ratingColor;
   if (gameData.rating >= 4) ratingColor = "#33ff00";
   else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -24,6 +24,14 @@ const GameCard = ({ gameData }) => {
           {gameData.rating.toFixed(2)}
         </p>
       </div>
+      <button
+        className={classes.deleteBtn}
+        onClick={() => {
+          deleteGame(gameData.id);
+        }}
+      >
+        Удалить
+      </button>
     </li>
   );
 };

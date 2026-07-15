@@ -22,6 +22,10 @@ const Main = () => {
     ]);
   }
 
+  function deleteGameById(id) {
+    setGameList(gameList.filter((game) => game.id !== id));
+  }
+
   return (
     <main className={classes.main}>
       <h1 className={classes.title}>Library</h1>
@@ -40,7 +44,10 @@ const Main = () => {
       ) : (
         <></>
       )}
-      <GameList gamesData={searchGame(gameList, search)} />
+      <GameList
+        gamesData={searchGame(gameList, search)}
+        deleteGame={deleteGameById}
+      />
     </main>
   );
 };

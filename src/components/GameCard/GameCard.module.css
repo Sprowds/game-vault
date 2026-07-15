@@ -49,3 +49,20 @@
 .icon {
   max-width: 10px;
 }
+
+.deleteBtn {
+  padding: 5px 13px;
+
+  border: 1px solid var(--alert-color);
+  border-radius: 16px;
+
+  font-weight: 600;
+  color: var(--alert-color);
+
+  transition: 0.2s;
+}
+
+.deleteBtn:hover {
+  background-color: var(--alert-color);
+  color: #fff;
+}
