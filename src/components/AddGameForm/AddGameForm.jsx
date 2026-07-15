@@ -3,16 +3,10 @@ import SelectDropdown from "../../ui/SelectDropdown/SelectDropdown";
 import platformList from "../../data/platformList.json";
 import statusList from "../../data/statusList.json";
 import { useState, useEffect } from "react";
+import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
 
 const AddGameForm = ({ addNewGame, setAddGameActive }) => {
-  const initialNewGameState = {
-    name: "",
-    platform: "Steam",
-    rating: 0,
-    status: "Playing",
-    cover: "",
-  };
-  const [newGame, setNewGame] = useState(initialNewGameState);
+  const [newGame, setNewGame] = useState(INITIAL_NEW_GAME);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,6 +15,14 @@ const AddGameForm = ({ addNewGame, setAddGameActive }) => {
       ...prev,
       [name]: value,
     }));
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setAddGameActive(false);
+
+    addNewGame(newGame);
+    setNewGame(INITIAL_NEW_GAME);
   }
 
   useEffect(() => {
@@ -37,16 +39,7 @@ const AddGameForm = ({ addNewGame, setAddGameActive }) => {
         className={classes.modal__overlay}
         onClick={() => setAddGameActive(false)}
       ></div>
-      <form
-        className={classes.addGameForm}
-        onSubmit={(event) => {
-          event.preventDefault();
-          setAddGameActive(false);
-
-          addNewGame(newGame);
-          setNewGame(initialNewGameState);
-        }}
-      >
+      <form className={classes.addGameForm} onSubmit={handleSubmit}>
         <h3 className={classes.title}>Add Game</h3>
         <div className="name">
           <label htmlFor="gameName">Name</label>
@@ -73,6 +66,7 @@ const AddGameForm = ({ addNewGame, setAddGameActive }) => {
             onChange={handleChange}
             min="1"
             max="5"
+            step="0.01"
           />
         </div>
         <SelectDropdown

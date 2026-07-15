@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
@@ -8,7 +8,27 @@ import gamesData from "../../data/games.json";
 
 const Main = () => {
   const [search, setSearch] = useState("");
-  const [gameList, setGameList] = useState(gamesData);
+  function editSearchString(string) {
+    setSearch(string);
+  }
+
+  const [gameList, setGameList] = useState(() => {
+    try {
+      const savedLibrary = JSON.parse(localStorage.getItem("library"));
+      if (Array.isArray(savedLibrary)) {
+        return savedLibrary;
+      }
+
+      return gamesData;
+    } catch {
+      return gamesData;
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("library", JSON.stringify(gameList));
+  }, [gameList]);
+
   const [addGameActive, setAddGameActive] = useState(false);
 
   function addNewGame(newGame) {
@@ -23,13 +43,13 @@ const Main = () => {
   }
 
   function deleteGameById(id) {
-    setGameList(gameList.filter((game) => game.id !== id));
+    setGameList((prev) => prev.filter((game) => game.id !== id));
   }
 
   return (
     <main className={classes.main}>
       <h1 className={classes.title}>Library</h1>
-      <SearchForm setSearch={setSearch} />
+      <SearchForm editSearchString={editSearchString} />
       <button
         className={classes.addGameBtn}
         onClick={() => setAddGameActive(true)}

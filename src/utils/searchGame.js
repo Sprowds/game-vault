@@ -1,5 +1,7 @@
-export default function searchGame(gameList, searchInput) {
+function searchGame(gameList, searchInput) {
   return gameList.filter((game) =>
-    game.name.toUpperCase().includes(searchInput),
+    game.name.toUpperCase().includes(searchInput.toUpperCase().trim()),
   );
 }
+
+export default searchGame;
