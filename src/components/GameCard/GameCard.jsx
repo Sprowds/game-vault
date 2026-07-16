@@ -2,7 +2,7 @@ import classes from "./GameCard.module.css";
 import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
 
-const GameCard = ({ gameData, deleteGame }) => {
+const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
   let ratingColor;
   if (gameData.rating >= 4) ratingColor = "#33ff00";
   else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -24,14 +24,24 @@ const GameCard = ({ gameData, deleteGame }) => {
           {gameData.rating.toFixed(2)}
         </p>
       </div>
-      <button
-        className={classes.deleteBtn}
-        onClick={() => {
-          deleteGame(gameData.id);
-        }}
-      >
-        Удалить
-      </button>
+      <div className={classes.interactWrapper}>
+        <button
+          className={classes.deleteBtn}
+          onClick={() => {
+            deleteGame(gameData.id);
+          }}
+        >
+          Delete
+        </button>
+        <button
+          className={classes.editBtn}
+          onClick={() => {
+            gameFormToogle(true, "edit", gameData.id);
+          }}
+        >
+          Edit
+        </button>
+      </div>
     </li>
   );
 };

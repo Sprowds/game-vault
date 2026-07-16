@@ -3,8 +3,9 @@ import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
 import searchGame from "../../utils/searchGame";
-import AddGameForm from "../AddGameForm/AddGameForm";
+import GameForm from "../GameForm/GameForm";
 import gamesData from "../../data/games.json";
+import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
 
 const Main = () => {
   const [search, setSearch] = useState("");
@@ -29,7 +30,27 @@ const Main = () => {
     localStorage.setItem("library", JSON.stringify(gameList));
   }, [gameList]);
 
-  const [addGameActive, setAddGameActive] = useState(false);
+  const [gameFormActive, setGameFormActive] = useState({
+    isActive: false,
+    action: "",
+  });
+
+  function gameFormToogle(isActive, action, gameId = "") {
+    if (action === "edit") {
+      setGameFormActive({
+        isActive,
+        action,
+        game: gameList.find((game) => {
+          if (game.id === gameId) return game;
+        }),
+      });
+    } else {
+      setGameFormActive({
+        isActive,
+        action,
+      });
+    }
+  }
 
   function addNewGame(newGame) {
     setGameList((prev) => [
@@ -42,6 +63,16 @@ const Main = () => {
     ]);
   }
 
+  function editGameById(gameNewData) {
+    setGameList((prevGames) =>
+      prevGames.map((game) => {
+        if (game.id === gameNewData.id)
+          return { ...gameNewData, rating: Number(gameNewData.rating) };
+        else return game;
+      }),
+    );
+  }
+
   function deleteGameById(id) {
     setGameList((prev) => prev.filter((game) => game.id !== id));
   }
@@ -52,14 +83,22 @@ const Main = () => {
       <SearchForm editSearchString={editSearchString} />
       <button
         className={classes.addGameBtn}
-        onClick={() => setAddGameActive(true)}
+        onClick={() => gameFormToogle(true, "add")}
       >
         Add game
       </button>
-      {addGameActive ? (
-        <AddGameForm
-          addNewGame={addNewGame}
-          setAddGameActive={setAddGameActive}
+      {gameFormActive.isActive === true ? (
+        <GameForm
+          mode={gameFormActive.action}
+          initialGame={
+            gameFormActive.action === "edit"
+              ? gameFormActive.game
+              : INITIAL_NEW_GAME
+          }
+          gameChange={
+            gameFormActive.action === "edit" ? editGameById : addNewGame
+          }
+          gameFormToogle={gameFormToogle}
         />
       ) : (
         <></>
@@ -67,6 +106,7 @@ const Main = () => {
       <GameList
         gamesData={searchGame(gameList, search)}
         deleteGame={deleteGameById}
+        gameFormToogle={gameFormToogle}
       />
     </main>
   );

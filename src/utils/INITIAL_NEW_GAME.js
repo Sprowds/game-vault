@@ -3,7 +3,7 @@ const INITIAL_NEW_GAME = {
   platform: "Steam",
   rating: 1,
   status: "Playing",
-  cover: "",
+  cover: "src/assets/img/dota.jpg",
 };
 
 export default INITIAL_NEW_GAME;

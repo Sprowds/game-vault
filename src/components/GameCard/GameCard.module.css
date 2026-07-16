@@ -50,7 +50,15 @@
   max-width: 10px;
 }
 
+.interactWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 10px;
+}
+
 .deleteBtn {
+  width: 45%;
   padding: 5px 13px;
 
   border: 1px solid var(--alert-color);
@@ -64,5 +72,23 @@
 
 .deleteBtn:hover {
   background-color: var(--alert-color);
+  color: #fff;
+}
+
+.editBtn {
+  width: 45%;
+  padding: 5px 13px;
+
+  border: 1px solid rgb(206, 138, 12);
+  border-radius: 16px;
+
+  font-weight: 600;
+  color: rgb(206, 138, 12);
+
+  transition: 0.2s;
+}
+
+.editBtn:hover {
+  background-color: rgb(206, 138, 12);
   color: #fff;
 }
