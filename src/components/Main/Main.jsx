@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
-import searchGame from "../../utils/searchGame";
+import filterGameByName from "../../utils/filterGameByName";
 import GameForm from "../GameForm/GameForm";
-import gamesData from "../../data/games.json";
 import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
+import { loadLibrary, saveLibrary } from "../../utils/libraryLocalStorage";
 
 const Main = () => {
   const [search, setSearch] = useState("");
@@ -13,21 +13,10 @@ const Main = () => {
     setSearch(string);
   }
 
-  const [gameList, setGameList] = useState(() => {
-    try {
-      const savedLibrary = JSON.parse(localStorage.getItem("library"));
-      if (Array.isArray(savedLibrary)) {
-        return savedLibrary;
-      }
-
-      return gamesData;
-    } catch {
-      return gamesData;
-    }
-  });
+  const [gameList, setGameList] = useState(loadLibrary);
 
   useEffect(() => {
-    localStorage.setItem("library", JSON.stringify(gameList));
+    saveLibrary(gameList);
   }, [gameList]);
 
   const [gameFormActive, setGameFormActive] = useState({
@@ -104,7 +93,7 @@ const Main = () => {
         <></>
       )}
       <GameList
-        gamesData={searchGame(gameList, search)}
+        gamesData={filterGameByName(gameList, search)}
         deleteGame={deleteGameById}
         gameFormToogle={gameFormToogle}
       />
