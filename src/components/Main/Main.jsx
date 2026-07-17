@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
 import filterGameByName from "../../utils/filterGameByName";
 import GameForm from "../GameForm/GameForm";
-import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
-import { loadLibrary, saveLibrary } from "../../utils/libraryLocalStorage";
+import { useGamesLibrary } from "../../hooks/useGamesLibrary";
 
 const Main = () => {
   const [search, setSearch] = useState("");
@@ -13,58 +12,8 @@ const Main = () => {
     setSearch(string);
   }
 
-  const [gameList, setGameList] = useState(loadLibrary);
-
-  useEffect(() => {
-    saveLibrary(gameList);
-  }, [gameList]);
-
-  const [gameFormActive, setGameFormActive] = useState({
-    isActive: false,
-    action: "",
-  });
-
-  function gameFormToogle(isActive, action, gameId = "") {
-    if (action === "edit") {
-      setGameFormActive({
-        isActive,
-        action,
-        game: gameList.find((game) => {
-          if (game.id === gameId) return game;
-        }),
-      });
-    } else {
-      setGameFormActive({
-        isActive,
-        action,
-      });
-    }
-  }
-
-  function addNewGame(newGame) {
-    setGameList((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        ...newGame,
-        rating: Number(newGame.rating),
-      },
-    ]);
-  }
-
-  function editGameById(gameNewData) {
-    setGameList((prevGames) =>
-      prevGames.map((game) => {
-        if (game.id === gameNewData.id)
-          return { ...gameNewData, rating: Number(gameNewData.rating) };
-        else return game;
-      }),
-    );
-  }
-
-  function deleteGameById(id) {
-    setGameList((prev) => prev.filter((game) => game.id !== id));
-  }
+  const { gameList, gameFormActive, gameFormToogle, deleteGameById } =
+    useGamesLibrary();
 
   return (
     <main className={classes.main}>
@@ -79,14 +28,8 @@ const Main = () => {
       {gameFormActive.isActive === true ? (
         <GameForm
           mode={gameFormActive.action}
-          initialGame={
-            gameFormActive.action === "edit"
-              ? gameFormActive.game
-              : INITIAL_NEW_GAME
-          }
-          gameChange={
-            gameFormActive.action === "edit" ? editGameById : addNewGame
-          }
+          initialGame={gameFormActive.game}
+          gameChange={gameFormActive.func}
           gameFormToogle={gameFormToogle}
         />
       ) : (
