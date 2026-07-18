@@ -1,6 +1,7 @@
 import classes from "./GameCard.module.css";
 import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
+import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 
 const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
   let ratingColor;
@@ -25,22 +26,16 @@ const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
         </p>
       </div>
       <div className={classes.interactWrapper}>
-        <button
-          className={classes.deleteBtn}
-          onClick={() => {
-            deleteGame(gameData.id);
-          }}
-        >
-          Delete
-        </button>
-        <button
-          className={classes.editBtn}
-          onClick={() => {
-            gameFormToogle(true, "edit", gameData.id);
-          }}
-        >
-          Edit
-        </button>
+        <LibraryButton
+          name="Delete"
+          func={() => deleteGame(gameData.id)}
+          colorClass={classes.deleteBtn}
+        />
+        <LibraryButton
+          name="Edit"
+          func={() => gameFormToogle(true, "edit", gameData.id)}
+          colorClass={classes.editBtn}
+        />
       </div>
     </li>
   );

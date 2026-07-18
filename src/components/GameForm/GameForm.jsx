@@ -5,6 +5,7 @@ import statusList from "../../data/statusList.json";
 import useBodyScrollLock from "../../hooks/useBodyScrollLock";
 import { useState } from "react";
 import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
+import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 
 const GameForm = ({ mode, initialGame, gameChange, gameFormToogle }) => {
   useBodyScrollLock();
@@ -81,11 +82,18 @@ const GameForm = ({ mode, initialGame, gameChange, gameFormToogle }) => {
             onChange={handleChange}
           />
         </div>
-        <button className={classes.btn} type="submit">
-          Save
-        </button>
+        <LibraryButton
+          name={mode}
+          colorClass={
+            mode === "edit"
+              ? classes.editBtn
+              : mode === "add"
+                ? classes.saveBtn
+                : ""
+          }
+        />
         <span
-          className={classes.close}
+          className={classes.closeBtn}
           onClick={() => gameFormToogle(false, "")}
         >
           x

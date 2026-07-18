@@ -11,7 +11,7 @@
 }
 
 .gameForm {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   display: inline-flex;
@@ -28,17 +28,35 @@
   border: 1px solid #000;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-}
-
 .title {
   font-size: 30px;
 }
 
 .title::first-letter {
   text-transform: uppercase;
+}
+
+.saveBtn {
+  color: rgb(7, 206, 7);
+}
+
+.saveBtn:hover {
+  background-color: rgb(7, 206, 7);
+  border-color: rgb(7, 206, 7);
+}
+
+.editBtn {
+  color: rgb(206, 138, 12);
+}
+
+.editBtn:hover {
+  background-color: rgb(206, 138, 12);
+  border-color: rgb(206, 138, 12);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
 }

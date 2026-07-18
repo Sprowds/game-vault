@@ -1,4 +1,5 @@
 .gameList {
+  max-width: 70%;
   position: relative;
   display: flex;
   flex-wrap: wrap;
