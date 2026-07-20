@@ -14,14 +14,10 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
   transform: translate(-50%, -50%);
   z-index: 1001;
 
-  padding: 30px;
+  padding: 50px;
 
   background-color: var(--main-color);
   border-radius: 10px;
@@ -29,11 +25,45 @@
 }
 
 .title {
+  margin-bottom: 20px;
+
+  text-align: center;
   font-size: 30px;
 }
 
 .title::first-letter {
   text-transform: uppercase;
+}
+
+.form__inner {
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  text-align: center;
+  font-weight: 600;
+}
+
+.validation {
+  display: none;
+  margin-bottom: 20px;
+
+  flex-direction: column;
+  color: var(--alert-color);
+  font-weight: 600;
+}
+
+.interact {
+  display: flex;
+  justify-content: space-between;
 }
 
 .saveBtn {
@@ -54,9 +84,15 @@
   border-color: rgb(206, 138, 12);
 }
 
-.closeBtn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
+.cancelBtn {
+  color: var(--alert-color);
+}
+
+.cancelBtn:hover {
+  background-color: var(--alert-color);
+  border-color: var(--alert-color);
+}
+
+.active {
+  display: flex;
 }

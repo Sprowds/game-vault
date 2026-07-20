@@ -4,6 +4,7 @@ const SelectDropdown = ({ value, name, options, onChange }) => {
   return (
     <select
       value={value}
+      id={name}
       name={name}
       className={classes.list}
       onChange={onChange}

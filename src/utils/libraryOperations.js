@@ -1,4 +1,7 @@
 export function addNewGameToLibrary(newGame, setGameList) {
+  if (newGame.cover.length === 0) {
+    newGame.cover = "src/assets/img/dota.jpg";
+  }
   setGameList((prev) => [
     ...prev,
     {
