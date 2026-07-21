@@ -9,6 +9,19 @@
   text-align: center;
 }
 
+.main__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.library {
+  width: 75%;
+}
+
+.interactLibrary {
+  width: 25%;
+}
+
 .addGameBtn {
   display: block;
 

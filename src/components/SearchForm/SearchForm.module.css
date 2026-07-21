@@ -1,12 +1,12 @@
 .search {
   margin-bottom: 10px;
-  min-width: 15vw;
   min-height: 2vw;
+  max-width: 15vw;
 
   border: none;
   border-radius: 5px;
 
-  font-size: 20px;
+  font-size: 1.3vw;
 }
 
 .search:focus {

@@ -4,27 +4,50 @@ import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
 import filterGameByName from "../../utils/filterGameByName";
 import GameForm from "../GameForm/GameForm";
-import { useGamesLibrary } from "../../hooks/useGamesLibrary";
+import SortForm from "../SortForm/SortForm";
+import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 
-const Main = () => {
+const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
   const [search, setSearch] = useState("");
   function editSearchString(string) {
     setSearch(string);
   }
 
-  const { gameList, gameFormActive, gameFormToogle, deleteGameById } =
-    useGamesLibrary();
+  const [sortLibraryBy, setSortLibraryBy] = useState("name");
+  function editSortByString(string) {
+    setSortLibraryBy(string);
+  }
+
+  function getReadyLibrary() {
+    return filterGameByName(
+      sortGamesInLibrary(gameList, sortLibraryBy),
+      search,
+    );
+  }
 
   return (
     <main className={classes.main}>
       <h1 className={classes.title}>Library</h1>
-      <SearchForm editSearchString={editSearchString} />
-      <button
-        className={classes.addGameBtn}
-        onClick={() => gameFormToogle(true, "add")}
-      >
-        Add game
-      </button>
+      <div className={classes.main__content}>
+        <div className={classes.library}>
+          <GameList
+            gamesData={getReadyLibrary()}
+            deleteGame={deleteGameById}
+            gameFormToogle={gameFormToogle}
+          />
+        </div>
+        <div className={classes.interactLibrary}>
+          <SearchForm editSearchString={editSearchString} />
+          <button
+            className={classes.addGameBtn}
+            onClick={() => gameFormToogle(true, "add")}
+          >
+            Add game
+          </button>
+          <SortForm editSortByString={editSortByString} />
+        </div>
+      </div>
+
       {gameFormActive.isActive === true ? (
         <GameForm
           mode={gameFormActive.action}
@@ -35,11 +58,6 @@ const Main = () => {
       ) : (
         <></>
       )}
-      <GameList
-        gamesData={filterGameByName(gameList, search)}
-        deleteGame={deleteGameById}
-        gameFormToogle={gameFormToogle}
-      />
     </main>
   );
 };

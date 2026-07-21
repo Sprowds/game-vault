@@ -45,5 +45,10 @@ export const useGamesLibrary = () => {
     deleteGameFromLibraryById(id, setGameList);
   }
 
-  return { gameList, gameFormActive, gameFormToogle, deleteGameById };
+  return {
+    gameList,
+    gameFormActive,
+    gameFormToogle,
+    deleteGameById,
+  };
 };
