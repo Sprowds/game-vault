@@ -13,6 +13,9 @@ export function addNewGameToLibrary(newGame, setGameList) {
 }
 
 export function editGameInLibraryById(gameNewData, setGameList) {
+  if (gameNewData.cover.length === 0) {
+    gameNewData.cover = "src/assets/img/dota.jpg";
+  }
   setGameList((prevGames) =>
     prevGames.map((game) => {
       if (game.id === gameNewData.id)

@@ -18,7 +18,7 @@ const SortForm = ({ editSortByString }) => {
           className={classes.criterion}
           defaultChecked
         />
-        <label htmlFor="sortByName" class={classes.criterion__title}>
+        <label htmlFor="sortByName" className={classes.criterion__title}>
           By name
         </label>
       </div>
@@ -30,7 +30,7 @@ const SortForm = ({ editSortByString }) => {
           name="sort"
           className={classes.criterion}
         />
-        <label htmlFor="sortByRating" class={classes.criterion__title}>
+        <label htmlFor="sortByRating" className={classes.criterion__title}>
           By rating<span>(best first)</span>
         </label>
       </div>
