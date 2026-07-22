@@ -6,6 +6,7 @@ import filterGameByName from "../../utils/filterGameByName";
 import GameForm from "../GameForm/GameForm";
 import SortForm from "../SortForm/SortForm";
 import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
+import FilterForm from "../FilterForm/FilterForm";
 
 const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
   const [search, setSearch] = useState("");
@@ -45,6 +46,7 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
             Add game
           </button>
           <SortForm editSortByString={editSortByString} />
+          <FilterForm />
         </div>
       </div>
 

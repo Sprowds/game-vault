@@ -1,0 +1,9 @@
+.filterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  margin-left: 20px;
+}

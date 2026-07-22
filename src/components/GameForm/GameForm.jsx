@@ -3,8 +3,7 @@ import SelectDropdown from "../../ui/SelectDropdown/SelectDropdown";
 import platformList from "../../data/platformList.json";
 import statusList from "../../data/statusList.json";
 import useBodyScrollLock from "../../hooks/useBodyScrollLock";
-import { useEffect, useState } from "react";
-import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
+import { useState } from "react";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import gameFormInputValidation from "../../utils/gameFormInputValidation";
 import useKeyListener from "../../hooks/useKeyListener";
@@ -104,7 +103,7 @@ const GameForm = ({ mode, initialGame, gameChange, gameFormToogle }) => {
             <SelectDropdown
               value={newGame.status}
               name="status"
-              options={Object.values(statusList)}
+              options={Object.keys(statusList)}
               onChange={handleChange}
             />
           </li>

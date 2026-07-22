@@ -1,7 +1,7 @@
 {
-  "Steam": "#9282ec",
-  "Epic Games": "#a52f2f",
-  "PlayStation": "#d37c35a4",
-  "GOG": "#d37c35a4",
-  "Battle.net": "#d37c35a4"
+  "Steam": { "color": "#9282ec" },
+  "Epic Games": { "color": "#a52f2f" },
+  "PlayStation": { "color": "#d37c35a4" },
+  "GOG": { "color": "#d37c35a4" },
+  "Battle.net": { "color": "#d37c35a4" }
 }
