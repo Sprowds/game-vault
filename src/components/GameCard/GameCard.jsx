@@ -3,8 +3,9 @@ import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import GameStatus from "../GameStatus/GameStatus";
+import { memo } from "react";
 
-const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
+const GameCard = memo(({ gameData, deleteGame, gameFormToogle }) => {
   let ratingColor;
   if (gameData.rating >= 4) ratingColor = "#33ff00";
   else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -40,6 +41,6 @@ const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
       </div>
     </li>
   );
-};
+});
 
 export default GameCard;

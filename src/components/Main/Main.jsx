@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
@@ -23,17 +23,18 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
     platform: [],
     status: [],
   });
-  function editFilterLibrary(filterCategory, filterString) {
-    filterToggle(filterCategory, filterString, setFilterLibrary);
+
+  function editFilterLibrary(filterCategory, filterString, checked) {
+    filterToggle(filterCategory, filterString, setFilterLibrary, checked);
   }
 
-  function getReadyLibrary() {
+  const readyLibrary = useMemo(() => {
     return filterGamesLibrary(
       sortGamesInLibrary(gameList, sortLibraryBy),
       search,
       filterLibrary,
     );
-  }
+  }, [gameList, sortLibraryBy, filterLibrary, search]);
 
   return (
     <main className={classes.main}>
@@ -41,7 +42,7 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
       <div className={classes.main__content}>
         <div className={classes.library}>
           <GameList
-            gamesData={getReadyLibrary()}
+            gamesData={readyLibrary}
             deleteGame={deleteGameById}
             gameFormToogle={gameFormToogle}
           />
@@ -55,7 +56,10 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
             Add game
           </button>
           <SortForm editSortByString={editSortByString} />
-          <FilterLibrary editFilterLibrary={editFilterLibrary} />
+          <FilterLibrary
+            filterLibrary={filterLibrary}
+            editFilterLibrary={editFilterLibrary}
+          />
         </div>
       </div>
 

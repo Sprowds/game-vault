@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { loadLibrary, saveLibrary } from "../utils/libraryLocalStorage";
 import {
   addNewGameToLibrary,
@@ -21,18 +21,6 @@ export const useGamesLibrary = () => {
     func: function () {},
   });
 
-  function gameFormToogle(isActive, action, gameId = "") {
-    libraryGameFormToggle(
-      isActive,
-      action,
-      gameId,
-      setGameFormActive,
-      gameList,
-      editGameById,
-      addNewGame,
-    );
-  }
-
   function addNewGame(newGame) {
     addNewGameToLibrary(newGame, setGameList);
   }
@@ -41,9 +29,24 @@ export const useGamesLibrary = () => {
     editGameInLibraryById(gameNewData, setGameList);
   }
 
-  function deleteGameById(id) {
+  const deleteGameById = useCallback((id) => {
     deleteGameFromLibraryById(id, setGameList);
-  }
+  }, []);
+
+  const gameFormToogle = useCallback(
+    (isActive, action, gameId = "") => {
+      libraryGameFormToggle(
+        isActive,
+        action,
+        gameId,
+        setGameFormActive,
+        gameList,
+        editGameById,
+        addNewGame,
+      );
+    },
+    [gameList],
+  );
 
   return {
     gameList,

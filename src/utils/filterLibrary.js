@@ -5,7 +5,9 @@ function filterGameByName(gameList, searchInput) {
 }
 
 function filterLibraryBy(filterBy, gameList, selected) {
-  return gameList.filter((game) => selected.includes(game[filterBy]));
+  return gameList.filter(
+    (game) => game[filterBy] && selected.includes(game[filterBy]),
+  );
 }
 
 export function filterGamesLibrary(gameList, searchInput, filterList) {
@@ -20,13 +22,20 @@ export function filterGamesLibrary(gameList, searchInput, filterList) {
   return resultGameList;
 }
 
-export function filterToggle(filterCategory, filterString, setFilterList) {
+export function filterToggle(
+  filterCategory,
+  filterString,
+  setFilterList,
+  checked,
+) {
   setFilterList((prevFilterList) => {
-    if (!prevFilterList[filterCategory].includes(filterString)) {
-      return {
-        ...prevFilterList,
-        [filterCategory]: [...prevFilterList[filterCategory], filterString],
-      };
+    if (checked) {
+      if (!prevFilterList[filterCategory].includes(filterString)) {
+        return {
+          ...prevFilterList,
+          [filterCategory]: [...prevFilterList[filterCategory], filterString],
+        };
+      } else return prevFilterList;
     } else {
       return {
         ...prevFilterList,
