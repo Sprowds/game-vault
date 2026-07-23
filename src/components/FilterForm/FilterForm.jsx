@@ -1,63 +1,31 @@
 import classes from "./FilterForm.module.css";
-import platformList from "../../data/platformList.json";
-import statusList from "../../data/statusList.json";
-import { useState } from "react";
-import { filterToggle } from "../../utils/filterLibrary";
 
-const FilterForm = () => {
-  const [filterArray, setFilterArray] = useState([]);
+const FilterForm = ({ filterBy, filterList, editFilterLibrary, itemShow }) => {
   return (
     <form
-      className={classes.filterForm}
+      className={classes.filter__form}
       onChange={(event) => {
-        filterToggle(event.target.value, setFilterArray);
+        editFilterLibrary(filterBy, event.target.value);
       }}
     >
-      <h4 className={classes.title}>Filter</h4>
-      <div className={classes.filter__wrapper}>
-        <h5 className={classes.filter__title}>By platform</h5>
-        <ul className={classes.filter__list}>
-          {Object.keys(platformList).map((platform) => {
-            return (
-              <li className={classes.filter__item} key={platform}>
-                <input
-                  id={platform}
-                  value={platform}
-                  type="checkbox"
-                  className={classes.filter__item_input}
-                />
-                <label
-                  htmlFor={platform}
-                  className={classes.filter__item_label}
-                >
-                  {platform}
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-
-      <div className={classes.filter__wrapper}>
-        <h5 className={classes.filter__title}>By status</h5>
-        <ul className={classes.filter__list}>
-          {Object.keys(statusList).map((status) => {
-            return (
-              <li className={classes.filter__item} key={status}>
-                <input
-                  id={status}
-                  value={status}
-                  type="checkbox"
-                  className={classes.filter__item_input}
-                />
-                <label htmlFor={status} className={classes.filter__item_label}>
-                  {status}
-                </label>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <h5 className={classes.filter__title}>By {filterBy}</h5>
+      <ul className={classes.filter__list}>
+        {Object.keys(filterList).map((filter) => {
+          return (
+            <li className={classes.filter__item} key={filter}>
+              <input
+                id={filter}
+                value={filter}
+                type="checkbox"
+                className={classes.filter__item_input}
+              />
+              <label htmlFor={filter} className={classes.filter__item_label}>
+                {itemShow(filter)}
+              </label>
+            </li>
+          );
+        })}
+      </ul>
     </form>
   );
 };

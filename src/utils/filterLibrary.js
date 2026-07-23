@@ -4,22 +4,36 @@ function filterGameByName(gameList, searchInput) {
   );
 }
 
-function filterLibraryByPlatform(gameList, selectedPlatforms) {
-  return gameList.filter((game) => {
-    selectedPlatforms.includes(game.platform);
-  });
+function filterLibraryBy(filterBy, gameList, selected) {
+  return gameList.filter((game) => selected.includes(game[filterBy]));
 }
 
-function filterLibraryByStatus(gameList, selectedStatuses) {
-  return gameList.filter((game) => {
-    selectedStatuses.includes(game.status);
-  });
+export function filterGamesLibrary(gameList, searchInput, filterList) {
+  let resultGameList = filterGameByName([...gameList], searchInput);
+
+  for (const [key, value] of Object.entries(filterList)) {
+    if (value.length === 0) continue;
+
+    resultGameList = filterLibraryBy(key, resultGameList, value);
+  }
+
+  return resultGameList;
 }
 
-export function filterToggle(filter, setFilterList) {
-  setFilterList((prev) => {
-    if (prev.includes(filter))
-      return prev.filter((filterItem) => filterItem !== filter);
-    else return [...prev, filter];
+export function filterToggle(filterCategory, filterString, setFilterList) {
+  setFilterList((prevFilterList) => {
+    if (!prevFilterList[filterCategory].includes(filterString)) {
+      return {
+        ...prevFilterList,
+        [filterCategory]: [...prevFilterList[filterCategory], filterString],
+      };
+    } else {
+      return {
+        ...prevFilterList,
+        [filterCategory]: prevFilterList[filterCategory].filter(
+          (filter) => filter !== filterString,
+        ),
+      };
+    }
   });
 }

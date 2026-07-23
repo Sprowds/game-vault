@@ -6,6 +6,15 @@
   margin-bottom: 5px;
 }
 
+.criterion {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.criterion:hover {
+  color: var(--alert-color);
+}
+
 .criterion__title span {
   font-size: 11px;
 }

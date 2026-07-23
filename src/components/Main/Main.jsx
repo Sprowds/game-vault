@@ -2,11 +2,11 @@ import { useState } from "react";
 import classes from "./Main.module.css";
 import GameList from "../GameList/GameList";
 import SearchForm from "../SearchForm/SearchForm";
-import filterGameByName from "../../utils/filterGameByName";
 import GameForm from "../GameForm/GameForm";
 import SortForm from "../SortForm/SortForm";
 import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
-import FilterForm from "../FilterForm/FilterForm";
+import FilterLibrary from "../FilterLibrary/FilterLibrary";
+import { filterGamesLibrary, filterToggle } from "../../utils/filterLibrary";
 
 const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
   const [search, setSearch] = useState("");
@@ -19,10 +19,19 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
     setSortLibraryBy(string);
   }
 
+  const [filterLibrary, setFilterLibrary] = useState({
+    platform: [],
+    status: [],
+  });
+  function editFilterLibrary(filterCategory, filterString) {
+    filterToggle(filterCategory, filterString, setFilterLibrary);
+  }
+
   function getReadyLibrary() {
-    return filterGameByName(
+    return filterGamesLibrary(
       sortGamesInLibrary(gameList, sortLibraryBy),
       search,
+      filterLibrary,
     );
   }
 
@@ -46,7 +55,7 @@ const Main = ({ gameList, gameFormActive, gameFormToogle, deleteGameById }) => {
             Add game
           </button>
           <SortForm editSortByString={editSortByString} />
-          <FilterForm />
+          <FilterLibrary editFilterLibrary={editFilterLibrary} />
         </div>
       </div>
 

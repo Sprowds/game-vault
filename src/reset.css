@@ -54,6 +54,11 @@ select {
   font: inherit;
 }
 
+label,
+input {
+  cursor: inherit;
+}
+
 @media (favors-reduced-motion: reduce) {
   *,
   * ::before,

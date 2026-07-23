@@ -1,9 +1,23 @@
-.filterForm {
+.filter__list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 3px;
 }
 
-.title {
-  margin-left: 20px;
+.filter__item {
+  width: fit-content;
+  cursor: pointer;
+
+  display: flex;
+  padding: 0 5px;
+
+  border-radius: 6px;
+}
+
+.filter__item:hover {
+  background-color: #fff;
+}
+
+.filter__item:hover p {
+  color: #000 !important;
 }

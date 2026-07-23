@@ -2,6 +2,7 @@ import classes from "./GameCard.module.css";
 import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
+import GameStatus from "../GameStatus/GameStatus";
 
 const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
   let ratingColor;
@@ -17,8 +18,8 @@ const GameCard = ({ gameData, deleteGame, gameFormToogle }) => {
         className={classes.cover}
       />
       <h3 className={classes.title}>{gameData.name}</h3>
-      <Platform platform={gameData.platform} />
-      <p className={classes.status}>{gameData.status}</p>
+      <Platform platform={gameData.platform} className={classes.platform} />
+      <GameStatus status={gameData.status} className={classes.status} />
       <div className={classes.rating__wrapper}>
         <img src={starIcon} className={classes.icon} alt="Star icon" />
         <p className={classes.rating} style={{ color: ratingColor }}>

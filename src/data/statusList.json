@@ -1,6 +1,6 @@
 {
-  "Playing": {},
-  "Completed": {},
-  "Backlog": {},
-  "Dropped": {}
+  "Playing": { "color": "#2abde2" },
+  "Completed": { "color": "#11da11" },
+  "Backlog": { "color": "#e5ff00" },
+  "Dropped": { "color": "#f11111" }
 }
