@@ -10,6 +10,7 @@
 }
 
 .main__content {
+  position: relative;
   display: flex;
   justify-content: space-between;
 }
@@ -19,7 +20,14 @@
 }
 
 .interactLibrary {
-  width: 25%;
+  position: sticky;
+  top: 5vh;
+  width: fit-content;
+  height: fit-content;
+  padding: 20px 10px;
+
+  border-radius: 10px;
+  border: 1px solid #fff;
 }
 
 .addGameBtn {
