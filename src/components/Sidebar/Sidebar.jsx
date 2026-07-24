@@ -1,6 +1,12 @@
+import { NavLink } from "react-router-dom";
 import classes from "./Sidebar.module.css";
 
-const sidebarItems = ["Library", "Favorites", "Statistics", "Settings"];
+const sidebarItems = [
+  { name: "Library", path: "/library" },
+  { name: "Favorites", path: "/favorites" },
+  { name: "Statistics", path: "/statistics" },
+  { name: "Settings", path: "/settings" },
+];
 
 const Sidebar = () => {
   return (
@@ -9,10 +15,15 @@ const Sidebar = () => {
         <ul className={classes.list}>
           {sidebarItems.map((item) => {
             return (
-              <li className={classes.item} key={item}>
-                <a href="#" className={classes.link}>
-                  {item}
-                </a>
+              <li className={classes.item} key={item.name}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `${classes.link} ${isActive ? classes.active : ""}`
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </li>
             );
           })}

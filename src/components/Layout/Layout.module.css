@@ -1,0 +1,9 @@
+.contentWrapper {
+  padding-top: 10px;
+  display: flex;
+}
+
+.content {
+  min-height: calc(100vh - 76px);
+  background-color: var(--main-color);
+}

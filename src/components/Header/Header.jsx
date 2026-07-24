@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 
 const Header = () => {
@@ -5,9 +6,9 @@ const Header = () => {
     <header className={classes.header}>
       <div className="container">
         <div className={classes.header__inner}>
-          <a href="" className={classes.logo}>
+          <NavLink to="/library" className={classes.logo}>
             Game<span>Vault</span>
-          </a>
+          </NavLink>
           <button className={classes.user}>Madi</button>
         </div>
       </div>

@@ -1,20 +1,12 @@
 :root {
   --main-color: rgb(34, 73, 107);
   --alert-color: rgb(241, 62, 62);
+  --success-color: rgb(56, 167, 71);
 }
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #fff;
-}
-
-.no_scroll {
-  overflow: hidden;
-}
-
-.content-wrapper {
-  padding-top: 10px;
-  display: flex;
 }
 
 .container {
@@ -23,12 +15,6 @@ body {
   padding: 0 20px;
 }
 
-.content {
-  min-height: calc(100vh - 76px);
-  background-color: var(--main-color);
-}
-
-a:focus {
-  outline: none;
-  background-color: rgb(22, 49, 71);
+.no_scroll {
+  overflow: hidden;
 }

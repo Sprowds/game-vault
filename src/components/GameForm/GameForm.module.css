@@ -67,12 +67,12 @@
 }
 
 .saveBtn {
-  color: rgb(7, 206, 7);
+  color: var(--success-color);
 }
 
 .saveBtn:hover {
-  background-color: rgb(7, 206, 7);
-  border-color: rgb(7, 206, 7);
+  background-color: var(--success-color);
+  border-color: var(--success-color);
 }
 
 .editBtn {
