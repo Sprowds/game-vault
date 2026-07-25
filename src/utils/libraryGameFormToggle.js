@@ -1,7 +1,6 @@
 import INITIAL_NEW_GAME from "./INITIAL_NEW_GAME";
 
 export function libraryGameFormToggle(
-  isActive,
   action,
   gameId = "",
   setGameFormActive,
@@ -11,7 +10,6 @@ export function libraryGameFormToggle(
 ) {
   if (action === "edit") {
     setGameFormActive({
-      isActive,
       action,
       game: gameList.find((game) => {
         if (game.id === gameId) return game;
@@ -20,7 +18,6 @@ export function libraryGameFormToggle(
     });
   } else {
     setGameFormActive({
-      isActive,
       action,
       game: INITIAL_NEW_GAME,
       func: addNewGameFunction,

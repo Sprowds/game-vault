@@ -15,7 +15,6 @@ export const useGamesLibrary = () => {
   }, [gameList]);
 
   const [gameFormActive, setGameFormActive] = useState({
-    isActive: false,
     action: "",
     game: {},
     func: function () {},
@@ -34,9 +33,8 @@ export const useGamesLibrary = () => {
   }, []);
 
   const gameFormToogle = useCallback(
-    (isActive, action, gameId = "") => {
+    (action, gameId = "") => {
       libraryGameFormToggle(
-        isActive,
         action,
         gameId,
         setGameFormActive,

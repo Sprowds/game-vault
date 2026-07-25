@@ -7,7 +7,12 @@ import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 import FilterLibrary from "../../components/FilterLibrary/FilterLibrary";
 import { filterGamesLibrary, filterToggle } from "../../utils/filterLibrary";
 
-const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
+const LibraryPage = ({
+  gameList,
+  editModalWindowToggle,
+  gameFormToogle,
+  deleteGameById,
+}) => {
   const [search, setSearch] = useState("");
   function editSearchString(string) {
     setSearch(string);
@@ -43,6 +48,7 @@ const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
           <GameList
             gamesData={readyLibrary}
             deleteGame={deleteGameById}
+            editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
           />
         </div>
@@ -50,7 +56,10 @@ const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
           <SearchForm editSearchString={editSearchString} />
           <button
             className={classes.addGameBtn}
-            onClick={() => gameFormToogle(true, "add")}
+            onClick={() => {
+              gameFormToogle("add");
+              editModalWindowToggle(true, "GameForm");
+            }}
           >
             Add game
           </button>

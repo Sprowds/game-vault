@@ -1,7 +1,12 @@
 import GameCard from "../GameCard/GameCard";
 import classes from "./GameList.module.css";
 
-const GameList = ({ gamesData, deleteGame, gameFormToogle }) => {
+const GameList = ({
+  gamesData,
+  deleteGame,
+  editModalWindowToggle,
+  gameFormToogle,
+}) => {
   return (
     <ul className={classes.gameList}>
       {gamesData.map((game) => {
@@ -9,6 +14,7 @@ const GameList = ({ gamesData, deleteGame, gameFormToogle }) => {
           <GameCard
             gameData={game}
             deleteGame={deleteGame}
+            editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
             key={game.id}
           />

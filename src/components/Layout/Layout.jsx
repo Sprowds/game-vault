@@ -3,8 +3,31 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 import GameForm from "../GameForm/GameForm";
+import ModalWindow from "../ModalWindow/ModalWindow";
 
-const Layout = ({ gameFormActive, gameFormToogle }) => {
+const Layout = ({
+  modalWindowToggle,
+  editModalWindowToggle,
+  gameFormActive,
+  gameFormToogle,
+}) => {
+  const gameFormElement = (
+    <GameForm
+      mode={gameFormActive.action}
+      initialGame={gameFormActive.game}
+      gameChange={gameFormActive.func}
+      gameFormToogle={gameFormToogle}
+      editModalWindowToggle={editModalWindowToggle}
+    />
+  );
+
+  const modalWindowElement = (
+    <ModalWindow
+      window={modalWindowToggle.window === "GameForm" ? gameFormElement : <></>}
+      editModalWindowToggle={editModalWindowToggle}
+    />
+  );
+
   return (
     <>
       <Header />
@@ -16,16 +39,7 @@ const Layout = ({ gameFormActive, gameFormToogle }) => {
           </div>
         </div>
       </div>
-      {gameFormActive.isActive === true ? (
-        <GameForm
-          mode={gameFormActive.action}
-          initialGame={gameFormActive.game}
-          gameChange={gameFormActive.func}
-          gameFormToogle={gameFormToogle}
-        />
-      ) : (
-        <></>
-      )}
+      {modalWindowToggle.isActive === true ? modalWindowElement : <></>}
     </>
   );
 };
