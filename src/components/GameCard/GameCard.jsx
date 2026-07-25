@@ -6,7 +6,13 @@ import GameStatus from "../GameStatus/GameStatus";
 import { memo } from "react";
 
 const GameCard = memo(
-  ({ gameData, deleteGame, editModalWindowToggle, gameFormToogle }) => {
+  ({
+    gameData,
+    deleteGame,
+    editModalWindowToggle,
+    gameFormToogle,
+    deleteConfirmationFormToggleHandler,
+  }) => {
     let ratingColor;
     if (gameData.rating >= 4) ratingColor = "#33ff00";
     else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -31,7 +37,10 @@ const GameCard = memo(
         <div className={classes.interactWrapper}>
           <LibraryButton
             name="Delete"
-            func={() => deleteGame(gameData.id)}
+            func={() => {
+              deleteConfirmationFormToggleHandler(true, gameData.id);
+              editModalWindowToggle(true, "DeleteConfirmationForm");
+            }}
             colorClass={classes.deleteBtn}
           />
           <LibraryButton

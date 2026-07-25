@@ -18,10 +18,18 @@ function App() {
     isActive: false,
     window: "",
   });
-
   const editModalWindowToggle = useCallback((isActive, window) => {
     setModalWindowToggle({ isActive, window });
   }, []);
+
+  const [deleteConfirmationFormToggle, setDeleteConfirmationFormToggle] =
+    useState({
+      isActive: false,
+      gameId: "",
+    });
+  const deleteConfirmationFormToggleHandler = (isActive, gameId) => {
+    setDeleteConfirmationFormToggle({ isActive, gameId });
+  };
 
   const libraryElement = (
     <LibraryPage
@@ -29,6 +37,8 @@ function App() {
       editModalWindowToggle={editModalWindowToggle}
       gameFormToogle={gameFormToogle}
       deleteGameById={deleteGameById}
+      deleteConfirmationFormToggle={deleteConfirmationFormToggle}
+      deleteConfirmationFormToggleHandler={deleteConfirmationFormToggleHandler}
     />
   );
 
@@ -38,6 +48,9 @@ function App() {
       editModalWindowToggle={editModalWindowToggle}
       gameFormActive={gameFormActive}
       gameFormToogle={gameFormToogle}
+      deleteGameById={deleteGameById}
+      deleteConfirmationFormToggle={deleteConfirmationFormToggle}
+      deleteConfirmationFormToggleHandler={deleteConfirmationFormToggleHandler}
     />
   );
 

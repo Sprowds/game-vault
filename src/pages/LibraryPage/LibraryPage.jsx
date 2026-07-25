@@ -12,6 +12,8 @@ const LibraryPage = ({
   editModalWindowToggle,
   gameFormToogle,
   deleteGameById,
+  deleteConfirmationFormToggle,
+  deleteConfirmationFormToggleHandler,
 }) => {
   const [search, setSearch] = useState("");
   function editSearchString(string) {
@@ -50,6 +52,9 @@ const LibraryPage = ({
             deleteGame={deleteGameById}
             editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
+            deleteConfirmationFormToggleHandler={
+              deleteConfirmationFormToggleHandler
+            }
           />
         </div>
         <div className={classes.interactLibrary}>

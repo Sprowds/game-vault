@@ -6,6 +6,7 @@ const GameList = ({
   deleteGame,
   editModalWindowToggle,
   gameFormToogle,
+  deleteConfirmationFormToggleHandler,
 }) => {
   return (
     <ul className={classes.gameList}>
@@ -16,6 +17,9 @@ const GameList = ({
             deleteGame={deleteGame}
             editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
+            deleteConfirmationFormToggleHandler={
+              deleteConfirmationFormToggleHandler
+            }
             key={game.id}
           />
         );

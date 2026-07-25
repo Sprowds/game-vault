@@ -3,31 +3,18 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 import GameForm from "../GameForm/GameForm";
-import ModalWindow from "../ModalWindow/ModalWindow";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import DeleteConfirmationForm from "../DeleteConfirmationForm/DeleteConfirmationForm";
 
 const Layout = ({
   modalWindowToggle,
   editModalWindowToggle,
   gameFormActive,
   gameFormToogle,
+  deleteGameById,
+  deleteConfirmationFormToggle,
+  deleteConfirmationFormToggleHandler,
 }) => {
-  const gameFormElement = (
-    <GameForm
-      mode={gameFormActive.action}
-      initialGame={gameFormActive.game}
-      gameChange={gameFormActive.func}
-      gameFormToogle={gameFormToogle}
-      editModalWindowToggle={editModalWindowToggle}
-    />
-  );
-
-  const modalWindowElement = (
-    <ModalWindow
-      window={modalWindowToggle.window === "GameForm" ? gameFormElement : <></>}
-      editModalWindowToggle={editModalWindowToggle}
-    />
-  );
-
   return (
     <>
       <Header />
@@ -39,7 +26,35 @@ const Layout = ({
           </div>
         </div>
       </div>
-      {modalWindowToggle.isActive === true ? modalWindowElement : <></>}
+      {modalWindowToggle.isActive === true ? (
+        <ModalOverlay
+          window={
+            modalWindowToggle.window === "GameForm" ? (
+              <GameForm
+                mode={gameFormActive.action}
+                initialGame={gameFormActive.game}
+                gameChange={gameFormActive.func}
+                gameFormToogle={gameFormToogle}
+                editModalWindowToggle={editModalWindowToggle}
+              />
+            ) : modalWindowToggle.window === "DeleteConfirmationForm" ? (
+              <DeleteConfirmationForm
+                deleteGame={deleteGameById}
+                deleteConfirmationFormToggle={deleteConfirmationFormToggle}
+                deleteConfirmationFormToggleHandler={
+                  deleteConfirmationFormToggleHandler
+                }
+                editModalWindowToggle={editModalWindowToggle}
+              />
+            ) : (
+              <></>
+            )
+          }
+          editModalWindowToggle={editModalWindowToggle}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
