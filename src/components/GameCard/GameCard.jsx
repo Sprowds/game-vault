@@ -4,15 +4,17 @@ import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import GameStatus from "../GameStatus/GameStatus";
 import { memo } from "react";
+import { useDispatch } from "react-redux";
+import { deleteGameById } from "../../store/librarySlice";
 
 const GameCard = memo(
   ({
     gameData,
-    deleteGame,
     editModalWindowToggle,
     gameFormToogle,
     deleteConfirmationFormToggleHandler,
   }) => {
+    const dispatch = useDispatch();
     let ratingColor;
     if (gameData.rating >= 4) ratingColor = "#33ff00";
     else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -38,8 +40,7 @@ const GameCard = memo(
           <LibraryButton
             name="Delete"
             func={() => {
-              deleteConfirmationFormToggleHandler(true, gameData.id);
-              editModalWindowToggle(true, "DeleteConfirmationForm");
+              dispatch(deleteGameById(gameData.id));
             }}
             colorClass={classes.deleteBtn}
           />

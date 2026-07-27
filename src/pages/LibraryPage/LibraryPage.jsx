@@ -6,12 +6,13 @@ import SortForm from "../../components/SortForm/SortForm";
 import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 import FilterLibrary from "../../components/FilterLibrary/FilterLibrary";
 import { filterGamesLibrary, filterToggle } from "../../utils/filterLibrary";
+import { useDispatch } from "react-redux";
+import { addNewGame } from "../../store/librarySlice";
 
 const LibraryPage = ({
   gameList,
   editModalWindowToggle,
   gameFormToogle,
-  deleteGameById,
   deleteConfirmationFormToggle,
   deleteConfirmationFormToggleHandler,
 }) => {
@@ -42,6 +43,8 @@ const LibraryPage = ({
     );
   }, [gameList, sortLibraryBy, filterLibrary, search]);
 
+  const dispatch = useDispatch();
+
   return (
     <main className={classes.main}>
       <h1 className={classes.title}>Library</h1>
@@ -49,7 +52,6 @@ const LibraryPage = ({
         <div className={classes.library}>
           <GameList
             gamesData={readyLibrary}
-            deleteGame={deleteGameById}
             editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
             deleteConfirmationFormToggleHandler={
@@ -62,8 +64,17 @@ const LibraryPage = ({
           <button
             className={classes.addGameBtn}
             onClick={() => {
-              gameFormToogle("add");
-              editModalWindowToggle(true, "GameForm");
+              // gameFormToogle("add");
+              // editModalWindowToggle(true, "GameForm");
+              dispatch(
+                addNewGame({
+                  name: "sosal?",
+                  platform: "Steam",
+                  status: "Playing",
+                  rating: "5",
+                  cover: "",
+                }),
+              );
             }}
           >
             Add game

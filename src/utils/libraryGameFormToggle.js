@@ -24,3 +24,6 @@ export function libraryGameFormToggle(
     });
   }
 }
+/* Если action === "edit", то мы ищем игру по gameId в gameList и устанавливаем её в состояние gameFormActive 
+вместе с функцией редактирования. Если action не "edit", а "add" то мы устанавливаем новое состояние с 
+INITIAL_NEW_GAME и функцией добавления новой игры. */

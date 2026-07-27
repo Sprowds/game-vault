@@ -1,20 +1,20 @@
 import GameCard from "../GameCard/GameCard";
 import classes from "./GameList.module.css";
+import { useSelector } from "react-redux";
 
 const GameList = ({
   gamesData,
-  deleteGame,
   editModalWindowToggle,
   gameFormToogle,
   deleteConfirmationFormToggleHandler,
 }) => {
+  const gameList = useSelector((state) => state.library.gameList);
   return (
     <ul className={classes.gameList}>
-      {gamesData.map((game) => {
+      {gameList.map((game) => {
         return (
           <GameCard
             gameData={game}
-            deleteGame={deleteGame}
             editModalWindowToggle={editModalWindowToggle}
             gameFormToogle={gameFormToogle}
             deleteConfirmationFormToggleHandler={

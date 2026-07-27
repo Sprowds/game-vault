@@ -11,8 +11,7 @@ import { useGamesLibrary } from "./hooks/useGamesLibrary";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
-  const { gameList, gameFormActive, gameFormToogle, deleteGameById } =
-    useGamesLibrary();
+  const { gameList, gameFormActive, gameFormToogle } = useGamesLibrary();
 
   const [modalWindowToggle, setModalWindowToggle] = useState({
     isActive: false,
@@ -36,7 +35,6 @@ function App() {
       gameList={gameList}
       editModalWindowToggle={editModalWindowToggle}
       gameFormToogle={gameFormToogle}
-      deleteGameById={deleteGameById}
       deleteConfirmationFormToggle={deleteConfirmationFormToggle}
       deleteConfirmationFormToggleHandler={deleteConfirmationFormToggleHandler}
     />
@@ -48,7 +46,6 @@ function App() {
       editModalWindowToggle={editModalWindowToggle}
       gameFormActive={gameFormActive}
       gameFormToogle={gameFormToogle}
-      deleteGameById={deleteGameById}
       deleteConfirmationFormToggle={deleteConfirmationFormToggle}
       deleteConfirmationFormToggleHandler={deleteConfirmationFormToggleHandler}
     />
