@@ -1,21 +1,15 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import classes from "./LibraryPage.module.css";
 import GameList from "../../components/GameList/GameList";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import SortForm from "../../components/SortForm/SortForm";
-import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 import FilterLibrary from "../../components/FilterLibrary/FilterLibrary";
-import { filterGamesLibrary, filterToggle } from "../../utils/filterLibrary";
+import { filterToggle } from "../../utils/filterLibrary";
 import { useDispatch } from "react-redux";
-import { addNewGame } from "../../store/librarySlice";
+import { toggleGameFormModal } from "../../store/librarySlice";
+import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
 
-const LibraryPage = ({
-  gameList,
-  editModalWindowToggle,
-  gameFormToogle,
-  deleteConfirmationFormToggle,
-  deleteConfirmationFormToggleHandler,
-}) => {
+const LibraryPage = () => {
   const [search, setSearch] = useState("");
   function editSearchString(string) {
     setSearch(string);
@@ -35,14 +29,6 @@ const LibraryPage = ({
     filterToggle(filterCategory, filterString, setFilterLibrary, checked);
   }
 
-  const readyLibrary = useMemo(() => {
-    return filterGamesLibrary(
-      sortGamesInLibrary(gameList, sortLibraryBy),
-      search,
-      filterLibrary,
-    );
-  }, [gameList, sortLibraryBy, filterLibrary, search]);
-
   const dispatch = useDispatch();
 
   return (
@@ -51,12 +37,9 @@ const LibraryPage = ({
       <div className={classes.main__content}>
         <div className={classes.library}>
           <GameList
-            gamesData={readyLibrary}
-            editModalWindowToggle={editModalWindowToggle}
-            gameFormToogle={gameFormToogle}
-            deleteConfirmationFormToggleHandler={
-              deleteConfirmationFormToggleHandler
-            }
+            sortLibraryBy={sortLibraryBy}
+            search={search}
+            filterLibrary={filterLibrary}
           />
         </div>
         <div className={classes.interactLibrary}>
@@ -64,15 +47,11 @@ const LibraryPage = ({
           <button
             className={classes.addGameBtn}
             onClick={() => {
-              // gameFormToogle("add");
-              // editModalWindowToggle(true, "GameForm");
               dispatch(
-                addNewGame({
-                  name: "sosal?",
-                  platform: "Steam",
-                  status: "Playing",
-                  rating: "5",
-                  cover: "",
+                toggleGameFormModal({
+                  action: true,
+                  window: "gameForm",
+                  data: { mode: "add", game: INITIAL_NEW_GAME },
                 }),
               );
             }}

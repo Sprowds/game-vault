@@ -5,14 +5,15 @@ import statusList from "../../data/statusList.json";
 import { useState } from "react";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import gameFormInputValidation from "../../utils/gameFormInputValidation";
+import {
+  toggleGameFormModal,
+  addNewGame,
+  editGame,
+} from "../../store/librarySlice";
+import { useDispatch } from "react-redux";
 
-const GameForm = ({
-  mode,
-  initialGame,
-  gameChange,
-  gameFormToogle,
-  editModalWindowToggle,
-}) => {
+const GameForm = ({ mode, initialGame }) => {
+  const dispatch = useDispatch();
   const [newGame, setNewGame] = useState(initialGame);
 
   function handleChange(event) {
@@ -35,10 +36,16 @@ const GameForm = ({
       setFieldErrors(validation);
     } else {
       setFieldErrors([]);
-      gameFormToogle(false, "");
-      editModalWindowToggle(false, "");
-
-      gameChange(newGame);
+      console.log(mode);
+      if (mode === "add") dispatch(addNewGame(newGame));
+      if (mode === "edit") dispatch(editGame(newGame));
+      dispatch(
+        toggleGameFormModal({
+          action: false,
+          window: "",
+          data: null,
+        }),
+      );
     }
   }
 

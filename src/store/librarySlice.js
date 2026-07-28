@@ -5,14 +5,15 @@ import { libraryGameFormToggle } from "../utils/libraryGameFormToggle";
 
 const initialState = {
   gameList: loadLibrary(),
+
   modal: {
     isOpen: false,
-    mode: {
-      gameForm: false,
-      deleteConfirmationForm: false,
-    },
-    data: null,
-    func: null,
+    window: "",
+  },
+
+  gameForm: {
+    mode: "",
+    gameId: null,
   },
 };
 
@@ -40,7 +41,9 @@ const librarySlice = createSlice({
         newDataOfGame.cover = "src/assets/img/dota.jpg";
       }
 
-      const index = state.findIndex((item) => item.id === newDataOfGame.id);
+      const index = state.gameList.findIndex(
+        (item) => item.id === newDataOfGame.id,
+      );
       state.gameList[index] = {
         ...newDataOfGame,
         rating: Number(newDataOfGame.rating),
@@ -55,19 +58,23 @@ const librarySlice = createSlice({
       state.gameList.splice(index, 1);
       saveLibrary(state.gameList);
     },
-    toggleModal(state, action) {
-      const { isActive, mode, data, func } = action.payload;
+    toggleGameFormModal(state, action) {
+      const { action: isActive, window, data } = action.payload;
+      state.modal = { isActive, window };
 
-      state.modal = { isActive, ...state.modal, data, func };
-      for (let key in state.modal.mode) {
-        state.modal.mode[key] = false;
+      if (window === "gameForm") {
+        state[window] = {
+          mode: data.mode,
+          game: data.game,
+        };
+      } else {
+        state[window] = { mode: "", game: "" };
       }
-      state.modal.mode[mode] = true;
     },
   },
 });
 
-export const { addNewGame, editGame, deleteGameById, toggleModal } =
+export const { addNewGame, editGame, deleteGameById, toggleGameFormModal } =
   librarySlice.actions;
 export default librarySlice.reducer;
 

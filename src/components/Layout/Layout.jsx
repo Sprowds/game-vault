@@ -5,6 +5,8 @@ import { Outlet } from "react-router-dom";
 import GameForm from "../GameForm/GameForm";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import DeleteConfirmationForm from "../DeleteConfirmationForm/DeleteConfirmationForm";
+import { useSelector } from "react-redux";
+import { libraryGameFormToggle } from "../../utils/libraryGameFormToggle";
 
 const Layout = ({
   modalWindowToggle,
@@ -15,6 +17,9 @@ const Layout = ({
   deleteConfirmationFormToggle,
   deleteConfirmationFormToggleHandler,
 }) => {
+  const modalWindowStatus = useSelector((state) => state.library.modal);
+  const gameForm = useSelector((state) => state.library.gameForm);
+
   return (
     <>
       <Header />
@@ -26,17 +31,11 @@ const Layout = ({
           </div>
         </div>
       </div>
-      {modalWindowToggle.isActive === true ? (
+      {modalWindowStatus.isActive === true ? (
         <ModalOverlay
           window={
-            modalWindowToggle.window === "GameForm" ? (
-              <GameForm
-                mode={gameFormActive.action}
-                initialGame={gameFormActive.game}
-                gameChange={gameFormActive.func}
-                gameFormToogle={gameFormToogle}
-                editModalWindowToggle={editModalWindowToggle}
-              />
+            modalWindowStatus.window === "gameForm" ? (
+              <GameForm mode={gameForm.mode} initialGame={gameForm.game} />
             ) : modalWindowToggle.window === "DeleteConfirmationForm" ? (
               <DeleteConfirmationForm
                 deleteGame={deleteGameById}
