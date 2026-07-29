@@ -1,24 +1,16 @@
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import classes from "./DeleteConfirmationForm.module.css";
-import { deleteGameById, toggleGameFormModal } from "../../store/librarySlice";
+import { deleteGameById, closeLibraryModal } from "../../store/librarySlice";
 import { useDispatch } from "react-redux";
 
 const DeleteConfirmationForm = ({ gameId }) => {
   const dispatch = useDispatch();
-  const turnOffModal = () =>
-    dispatch(
-      toggleGameFormModal({
-        action: false,
-        window: "",
-        data: null,
-      }),
-    );
 
   function handleSubmit(event) {
     event.preventDefault();
 
     dispatch(deleteGameById(gameId));
-    turnOffModal();
+    dispatch(closeLibraryModal());
   }
 
   return (
@@ -35,7 +27,7 @@ const DeleteConfirmationForm = ({ gameId }) => {
         <LibraryButton
           name="Cancel"
           colorClass={classes.cancelBtn}
-          func={() => turnOffModal()}
+          func={() => dispatch(closeLibraryModal())}
         />
       </div>
     </form>

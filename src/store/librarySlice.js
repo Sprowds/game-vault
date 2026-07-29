@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadLibrary, saveLibrary } from "../utils/libraryLocalStorage";
+import { loadLibrary } from "../utils/libraryLocalStorage";
 
 const initialState = {
   gameList: loadLibrary(),
 
   modal: {
     isOpen: false,
-    window: "",
+    modalType: null,
   },
 
   gameForm: {
-    mode: "",
-    gameId: null,
+    mode: null,
+    game: null,
   },
 
   deleteConfirmationForm: {
-    gameid: null,
+    gameId: null,
   },
 };
 
@@ -34,7 +34,6 @@ const librarySlice = createSlice({
         ...newGame,
         rating: Number(newGame.rating),
       });
-      saveLibrary(state.gameList);
     },
     editGame(state, action) {
       // Редактирование уже существующей игры
@@ -50,7 +49,6 @@ const librarySlice = createSlice({
         ...newDataOfGame,
         rating: Number(newDataOfGame.rating),
       };
-      saveLibrary(state.gameList);
     },
     deleteGameById(state, action) {
       // Удаление игры по её id
@@ -58,26 +56,49 @@ const librarySlice = createSlice({
       const index = state.gameList.findIndex((item) => item.id === gameId);
 
       state.gameList.splice(index, 1);
-      saveLibrary(state.gameList);
     },
-    toggleGameFormModal(state, action) {
-      const { action: isActive, window, data } = action.payload;
-      state.modal = { isActive, window };
+    openLibraryModal(state, action) {
+      const { action: isActive, modalType, data } = action.payload;
+      state.modal = { isActive, modalType };
 
-      if (window === "gameForm") {
-        state[window] = {
-          mode: data.mode,
-          game: data.game,
-        };
-      } else if (window === "deleteConfirmationForm") {
-        state[window] = { gameId: data };
+      if (isActive) {
+        if (modalType === "gameForm") {
+          state.gameForm = {
+            mode: data.mode,
+            game: data.game,
+          };
+        } else if (modalType === "deleteConfirmationForm") {
+          state.deleteConfirmationForm = { gameId: data };
+        } else {
+          throw new Error("Not correct modal type");
+        }
       } else {
-        state[window] = { mode: "", game: "" };
+        throw new Error("Not correct value of isActive");
       }
+    },
+    closeLibraryModal(state) {
+      state.modal = {
+        isOpen: false,
+        modalType: null,
+      };
+
+      state.gameForm = {
+        mode: null,
+        game: null,
+      };
+
+      state.deleteConfirmationForm = {
+        gameId: null,
+      };
     },
   },
 });
 
-export const { addNewGame, editGame, deleteGameById, toggleGameFormModal } =
-  librarySlice.actions;
+export const {
+  addNewGame,
+  editGame,
+  deleteGameById,
+  openLibraryModal,
+  closeLibraryModal,
+} = librarySlice.actions;
 export default librarySlice.reducer;

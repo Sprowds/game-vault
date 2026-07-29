@@ -6,7 +6,7 @@ import { useState } from "react";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import gameFormInputValidation from "../../utils/gameFormInputValidation";
 import {
-  toggleGameFormModal,
+  closeLibraryModal,
   addNewGame,
   editGame,
 } from "../../store/librarySlice";
@@ -39,13 +39,7 @@ const GameForm = ({ mode, initialGame }) => {
       console.log(mode);
       if (mode === "add") dispatch(addNewGame(newGame));
       if (mode === "edit") dispatch(editGame(newGame));
-      dispatch(
-        toggleGameFormModal({
-          action: false,
-          window: "",
-          data: null,
-        }),
-      );
+      dispatch(closeLibraryModal());
     }
   }
 
@@ -138,13 +132,7 @@ const GameForm = ({ mode, initialGame }) => {
         <LibraryButton
           name="Cancel"
           func={() => {
-            dispatch(
-              toggleGameFormModal({
-                action: false,
-                window: "",
-                data: null,
-              }),
-            );
+            dispatch(closeLibraryModal());
           }}
           colorClass={classes.cancelBtn}
         />

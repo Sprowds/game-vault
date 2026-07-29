@@ -28,9 +28,9 @@ const Layout = () => {
       {modalWindowStatus.isActive === true ? (
         <ModalOverlay
           window={
-            modalWindowStatus.window === "gameForm" ? (
+            modalWindowStatus.modalType === "gameForm" ? (
               <GameForm mode={gameForm.mode} initialGame={gameForm.game} />
-            ) : modalWindowStatus.window === "deleteConfirmationForm" ? (
+            ) : modalWindowStatus.modalType === "deleteConfirmationForm" ? (
               <DeleteConfirmationForm gameId={deleteConfirmationForm.gameId} />
             ) : (
               <></>

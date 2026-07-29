@@ -6,7 +6,7 @@ import SortForm from "../../components/SortForm/SortForm";
 import FilterLibrary from "../../components/FilterLibrary/FilterLibrary";
 import { filterToggle } from "../../utils/filterLibrary";
 import { useDispatch } from "react-redux";
-import { toggleGameFormModal } from "../../store/librarySlice";
+import { openLibraryModal } from "../../store/librarySlice";
 import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
 
 const LibraryPage = () => {
@@ -48,9 +48,9 @@ const LibraryPage = () => {
             className={classes.addGameBtn}
             onClick={() => {
               dispatch(
-                toggleGameFormModal({
+                openLibraryModal({
                   action: true,
-                  window: "gameForm",
+                  modalType: "gameForm",
                   data: { mode: "add", game: INITIAL_NEW_GAME },
                 }),
               );

@@ -4,9 +4,10 @@ import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import GameStatus from "../GameStatus/GameStatus";
 import { useDispatch } from "react-redux";
-import { toggleGameFormModal } from "../../store/librarySlice";
+import { openLibraryModal } from "../../store/librarySlice";
+import { memo } from "react";
 
-const GameCard = ({ gameData }) => {
+const GameCard = memo(({ gameData }) => {
   const dispatch = useDispatch();
   let ratingColor;
   if (gameData.rating >= 4) ratingColor = "#33ff00";
@@ -34,9 +35,9 @@ const GameCard = ({ gameData }) => {
           name="Delete"
           func={() => {
             dispatch(
-              toggleGameFormModal({
+              openLibraryModal({
                 action: true,
-                window: "deleteConfirmationForm",
+                modalType: "deleteConfirmationForm",
                 data: gameData.id,
               }),
             );
@@ -47,9 +48,9 @@ const GameCard = ({ gameData }) => {
           name="Edit"
           func={() => {
             dispatch(
-              toggleGameFormModal({
+              openLibraryModal({
                 action: true,
-                window: "gameForm",
+                modalType: "gameForm",
                 data: { mode: "edit", game: gameData },
               }),
             );
@@ -59,6 +60,6 @@ const GameCard = ({ gameData }) => {
       </div>
     </li>
   );
-};
+});
 
 export default GameCard;
