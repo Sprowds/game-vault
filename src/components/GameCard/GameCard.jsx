@@ -3,9 +3,12 @@ import starIcon from "../../assets/icon/star-icon.svg";
 import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import GameStatus from "../GameStatus/GameStatus";
+import { useDispatch } from "react-redux";
+import { openLibraryModal } from "../../store/librarySlice";
 import { memo } from "react";
 
-const GameCard = memo(({ gameData, deleteGame, gameFormToogle }) => {
+const GameCard = memo(({ gameData }) => {
+  const dispatch = useDispatch();
   let ratingColor;
   if (gameData.rating >= 4) ratingColor = "#33ff00";
   else if (gameData.rating >= 3) ratingColor = "#fff239";
@@ -30,12 +33,28 @@ const GameCard = memo(({ gameData, deleteGame, gameFormToogle }) => {
       <div className={classes.interactWrapper}>
         <LibraryButton
           name="Delete"
-          func={() => deleteGame(gameData.id)}
+          func={() => {
+            dispatch(
+              openLibraryModal({
+                action: true,
+                modalType: "deleteConfirmationForm",
+                data: gameData.id,
+              }),
+            );
+          }}
           colorClass={classes.deleteBtn}
         />
         <LibraryButton
           name="Edit"
-          func={() => gameFormToogle(true, "edit", gameData.id)}
+          func={() => {
+            dispatch(
+              openLibraryModal({
+                action: true,
+                modalType: "gameForm",
+                data: { mode: "edit", game: gameData },
+              }),
+            );
+          }}
           colorClass={classes.editBtn}
         />
       </div>

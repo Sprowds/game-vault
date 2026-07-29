@@ -1,13 +1,15 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import classes from "./LibraryPage.module.css";
 import GameList from "../../components/GameList/GameList";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import SortForm from "../../components/SortForm/SortForm";
-import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 import FilterLibrary from "../../components/FilterLibrary/FilterLibrary";
-import { filterGamesLibrary, filterToggle } from "../../utils/filterLibrary";
+import { filterToggle } from "../../utils/filterLibrary";
+import { useDispatch } from "react-redux";
+import { openLibraryModal } from "../../store/librarySlice";
+import INITIAL_NEW_GAME from "../../utils/INITIAL_NEW_GAME";
 
-const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
+const LibraryPage = () => {
   const [search, setSearch] = useState("");
   function editSearchString(string) {
     setSearch(string);
@@ -27,13 +29,7 @@ const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
     filterToggle(filterCategory, filterString, setFilterLibrary, checked);
   }
 
-  const readyLibrary = useMemo(() => {
-    return filterGamesLibrary(
-      sortGamesInLibrary(gameList, sortLibraryBy),
-      search,
-      filterLibrary,
-    );
-  }, [gameList, sortLibraryBy, filterLibrary, search]);
+  const dispatch = useDispatch();
 
   return (
     <main className={classes.main}>
@@ -41,16 +37,24 @@ const LibraryPage = ({ gameList, gameFormToogle, deleteGameById }) => {
       <div className={classes.main__content}>
         <div className={classes.library}>
           <GameList
-            gamesData={readyLibrary}
-            deleteGame={deleteGameById}
-            gameFormToogle={gameFormToogle}
+            sortLibraryBy={sortLibraryBy}
+            search={search}
+            filterLibrary={filterLibrary}
           />
         </div>
         <div className={classes.interactLibrary}>
           <SearchForm editSearchString={editSearchString} />
           <button
             className={classes.addGameBtn}
-            onClick={() => gameFormToogle(true, "add")}
+            onClick={() => {
+              dispatch(
+                openLibraryModal({
+                  action: true,
+                  modalType: "gameForm",
+                  data: { mode: "add", game: INITIAL_NEW_GAME },
+                }),
+              );
+            }}
           >
             Add game
           </button>

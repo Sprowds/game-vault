@@ -6,31 +6,15 @@ import LibraryPage from "./pages/LibraryPage/LibraryPage";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
 import StatisticsPage from "./pages/StatisticsPage/StatisticsPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
-import { useGamesLibrary } from "./hooks/useGamesLibrary";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
-  const { gameList, gameFormActive, gameFormToogle, deleteGameById } =
-    useGamesLibrary();
-
-  const libraryElement = (
-    <LibraryPage
-      gameList={gameList}
-      gameFormToogle={gameFormToogle}
-      deleteGameById={deleteGameById}
-    />
-  );
-
-  const layoutElement = (
-    <Layout gameFormActive={gameFormActive} gameFormToogle={gameFormToogle} />
-  );
-
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={layoutElement}>
+        <Route element={<Layout />}>
           <Route index element={<Navigate to="/library" replace />} />
-          <Route path="library" element={libraryElement} />
+          <Route path="library" element={<LibraryPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="statistics" element={<StatisticsPage />} />
           <Route path="settings" element={<SettingsPage />} />

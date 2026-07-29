@@ -1,0 +1,46 @@
+.deleteConfirmationForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+
+  padding: 50px;
+
+  background-color: var(--main-color);
+  border-radius: 10px;
+  border: 1px solid #000;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.title span {
+  color: var(--alert-color);
+  font-weight: 600;
+}
+
+.interract__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirmBtn {
+  color: var(--alert-color);
+}
+
+.confirmBtn:hover {
+  background-color: var(--alert-color);
+  border-color: var(--alert-color);
+}
+
+.cancelBtn {
+  color: var(--success-color);
+}
+
+.cancelBtn:hover {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
