@@ -28,19 +28,19 @@
 }
 
 .confirmBtn {
-  color: var(--success-color);
-}
-
-.confirmBtn:hover {
-  background-color: var(--success-color);
-  border-color: var(--success-color);
-}
-
-.cancelBtn {
   color: var(--alert-color);
 }
 
-.cancelBtn:hover {
+.confirmBtn:hover {
   background-color: var(--alert-color);
   border-color: var(--alert-color);
+}
+
+.cancelBtn {
+  color: var(--success-color);
+}
+
+.cancelBtn:hover {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
 }

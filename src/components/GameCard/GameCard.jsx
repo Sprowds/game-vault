@@ -4,7 +4,7 @@ import Platform from "../Platform/Platform";
 import LibraryButton from "../../ui/LibraryButton/LibraryButton";
 import GameStatus from "../GameStatus/GameStatus";
 import { useDispatch } from "react-redux";
-import { deleteGameById, toggleGameFormModal } from "../../store/librarySlice";
+import { toggleGameFormModal } from "../../store/librarySlice";
 
 const GameCard = ({ gameData }) => {
   const dispatch = useDispatch();
@@ -33,7 +33,13 @@ const GameCard = ({ gameData }) => {
         <LibraryButton
           name="Delete"
           func={() => {
-            dispatch(deleteGameById(gameData.id));
+            dispatch(
+              toggleGameFormModal({
+                action: true,
+                window: "deleteConfirmationForm",
+                data: gameData.id,
+              }),
+            );
           }}
           colorClass={classes.deleteBtn}
         />

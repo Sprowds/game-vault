@@ -2,12 +2,24 @@ import { useCallback } from "react";
 import classes from "./ModalOverlay.module.css";
 import useKeyListener from "../../hooks/useKeyListener";
 import useBodyScrollLock from "../../hooks/useBodyScrollLock";
+import { toggleGameFormModal } from "../../store/librarySlice";
+import { useDispatch } from "react-redux";
 
-const ModalOverlay = ({ window, editModalWindowToggle }) => {
+const ModalOverlay = ({ window }) => {
   useBodyScrollLock();
 
+  const dispatch = useDispatch();
+  const turnOffModal = () =>
+    dispatch(
+      toggleGameFormModal({
+        action: false,
+        window: "",
+        data: null,
+      }),
+    );
+
   const escapeKeyHandler = useCallback(() => {
-    editModalWindowToggle(false, "");
+    turnOffModal();
   }, []);
   useKeyListener("Escape", escapeKeyHandler);
 
@@ -15,7 +27,7 @@ const ModalOverlay = ({ window, editModalWindowToggle }) => {
     <>
       <div
         className={classes.modal__overlay}
-        onClick={() => editModalWindowToggle(false, "")}
+        onClick={() => turnOffModal()}
       ></div>
       {window}
     </>

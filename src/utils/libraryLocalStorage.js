@@ -3,7 +3,7 @@ import gamesData from "../data/games.json";
 export function loadLibrary() {
   try {
     const savedLibrary = JSON.parse(localStorage.getItem("library"));
-    if (Array.isArray(savedLibrary)) {
+    if (Array.isArray(savedLibrary) && savedLibrary.length !== 0) {
       return savedLibrary;
     }
 

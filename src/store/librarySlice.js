@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useState, useEffect, useCallback } from "react";
 import { loadLibrary, saveLibrary } from "../utils/libraryLocalStorage";
-import { libraryGameFormToggle } from "../utils/libraryGameFormToggle";
 
 const initialState = {
   gameList: loadLibrary(),
@@ -14,6 +12,10 @@ const initialState = {
   gameForm: {
     mode: "",
     gameId: null,
+  },
+
+  deleteConfirmationForm: {
+    gameid: null,
   },
 };
 
@@ -67,6 +69,8 @@ const librarySlice = createSlice({
           mode: data.mode,
           game: data.game,
         };
+      } else if (window === "deleteConfirmationForm") {
+        state[window] = { gameId: data };
       } else {
         state[window] = { mode: "", game: "" };
       }
@@ -77,38 +81,3 @@ const librarySlice = createSlice({
 export const { addNewGame, editGame, deleteGameById, toggleGameFormModal } =
   librarySlice.actions;
 export default librarySlice.reducer;
-
-const useGamesLibrary = () => {
-  const [gameList, setGameList] = useState(loadLibrary);
-
-  useEffect(() => {
-    saveLibrary(gameList);
-  }, [gameList]);
-
-  const [gameFormActive, setGameFormActive] = useState({
-    action: "",
-    game: {},
-    func: function () {},
-  });
-
-  const gameFormToogle = useCallback(
-    (action, gameId = "") => {
-      libraryGameFormToggle(
-        action,
-        gameId,
-        setGameFormActive,
-        gameList,
-        editGameById,
-        addNewGame,
-      );
-    },
-    [gameList],
-  );
-
-  return {
-    gameList,
-    gameFormActive,
-    gameFormToogle,
-    deleteGameById,
-  };
-};

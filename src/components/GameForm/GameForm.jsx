@@ -138,8 +138,13 @@ const GameForm = ({ mode, initialGame }) => {
         <LibraryButton
           name="Cancel"
           func={() => {
-            gameFormToogle(false, "");
-            editModalWindowToggle(false, "");
+            dispatch(
+              toggleGameFormModal({
+                action: false,
+                window: "",
+                data: null,
+              }),
+            );
           }}
           colorClass={classes.cancelBtn}
         />
