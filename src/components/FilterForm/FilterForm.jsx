@@ -1,8 +1,11 @@
+import { useDispatch } from "react-redux";
 import classes from "./FilterForm.module.css";
 import { memo } from "react";
 
 const FilterForm = memo(
   ({ filterBy, filterList, activeFilters, editFilterLibrary, itemShow }) => {
+    const dispatch = useDispatch();
+
     return (
       <form className={classes.filter__form}>
         <h5 className={classes.filter__title}>By {filterBy}</h5>
@@ -17,10 +20,12 @@ const FilterForm = memo(
                   checked={activeFilters.includes(filter)}
                   className={classes.filter__item_input}
                   onChange={(event) => {
-                    editFilterLibrary(
-                      filterBy,
-                      event.target.value,
-                      event.target.checked,
+                    dispatch(
+                      editFilterLibrary({
+                        action: filterBy,
+                        filterString: event.target.value,
+                        checked: event.target.checked,
+                      }),
                     );
                   }}
                 />

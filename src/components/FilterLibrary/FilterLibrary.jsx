@@ -5,8 +5,11 @@ import FilterForm from "../FilterForm/FilterForm";
 import Platform from "../Platform/Platform";
 import GameStatus from "../GameStatus/GameStatus";
 import { useCallback } from "react";
+import { editFilterLibrary } from "../../store/librarySlice";
+import { useSelector } from "react-redux";
 
-const FilterLibrary = ({ filterLibrary, editFilterLibrary }) => {
+const FilterLibrary = () => {
+  const filterLibrary = useSelector((state) => state.library.filterLibrary);
   const platformShow = useCallback(
     (platform) => <Platform platform={platform} />,
     [],

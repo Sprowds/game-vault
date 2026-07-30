@@ -1,11 +1,14 @@
 import classes from "./SortForm.module.css";
+import { editSortLibraryBy } from "../../store/librarySlice";
+import { useDispatch } from "react-redux";
 
-const SortForm = ({ editSortByString }) => {
+const SortForm = () => {
+  const dispatch = useDispatch();
   return (
     <form
       className={classes.sortForm}
       onChange={(event) => {
-        editSortByString(event.target.value);
+        dispatch(editSortLibraryBy(event.target.value));
       }}
     >
       <h4 className={classes.title}>Sort:</h4>

@@ -17,6 +17,15 @@ const initialState = {
   deleteConfirmationForm: {
     gameId: null,
   },
+
+  searchString: "",
+
+  sortLibraryBy: "name",
+
+  filterLibrary: {
+    platform: [],
+    status: [],
+  },
 };
 
 const librarySlice = createSlice({
@@ -58,6 +67,7 @@ const librarySlice = createSlice({
       state.gameList.splice(index, 1);
     },
     openLibraryModal(state, action) {
+      // Открытие модального окна библиотеки
       const { action: isActive, modalType, data } = action.payload;
       state.modal = { isActive, modalType };
 
@@ -77,6 +87,7 @@ const librarySlice = createSlice({
       }
     },
     closeLibraryModal(state) {
+      // Закрытие модального окна библиотеки
       state.modal = {
         isOpen: false,
         modalType: null,
@@ -91,6 +102,30 @@ const librarySlice = createSlice({
         gameId: null,
       };
     },
+    // Изменение состояния строки поиска
+    editSearchString(state, action) {
+      state.searchString = action.payload;
+    },
+    // Изменение состояния сортировки
+    editSortLibraryBy(state, action) {
+      state.sortLibraryBy = action.payload;
+    },
+    // Изменение состояния объекта массивов фильтрации.
+    // Если фильтр checked, то проверяет состояние на наличие варианта фильтрации
+    // Если есть, то удаляет, если нет, то добавляет
+    editFilterLibrary(state, action) {
+      const { action: filterCategory, filterString, checked } = action.payload;
+
+      if (checked) {
+        if (!state.filterLibrary[filterCategory].includes(filterString)) {
+          state.filterLibrary[filterCategory].push(filterString);
+        }
+      } else {
+        state.filterLibrary[filterCategory] = state.filterLibrary[
+          filterCategory
+        ].filter((filter) => filter !== filterString);
+      }
+    },
   },
 });
 
@@ -100,5 +135,8 @@ export const {
   deleteGameById,
   openLibraryModal,
   closeLibraryModal,
+  editSearchString,
+  editSortLibraryBy,
+  editFilterLibrary,
 } = librarySlice.actions;
 export default librarySlice.reducer;

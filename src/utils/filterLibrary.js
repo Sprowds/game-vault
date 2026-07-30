@@ -21,28 +21,3 @@ export function filterGamesLibrary(gameList, searchInput, filterList) {
 
   return resultGameList;
 }
-
-export function filterToggle(
-  filterCategory,
-  filterString,
-  setFilterList,
-  checked,
-) {
-  setFilterList((prevFilterList) => {
-    if (checked) {
-      if (!prevFilterList[filterCategory].includes(filterString)) {
-        return {
-          ...prevFilterList,
-          [filterCategory]: [...prevFilterList[filterCategory], filterString],
-        };
-      } else return prevFilterList;
-    } else {
-      return {
-        ...prevFilterList,
-        [filterCategory]: prevFilterList[filterCategory].filter(
-          (filter) => filter !== filterString,
-        ),
-      };
-    }
-  });
-}

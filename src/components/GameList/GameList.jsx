@@ -5,16 +5,20 @@ import { useMemo } from "react";
 import { filterGamesLibrary } from "../../utils/filterLibrary";
 import sortGamesInLibrary from "../../utils/sortGamesInLibrary";
 
-const GameList = ({ sortLibraryBy, search, filterLibrary }) => {
+const GameList = () => {
   const gameList = useSelector((state) => state.library.gameList);
+  const search = useSelector((state) => state.library.searchString);
+  const sort = useSelector((state) => state.library.sortLibraryBy);
+  const filterLibrary = useSelector((state) => state.library.filterLibrary);
 
   const readyLibrary = useMemo(() => {
     return filterGamesLibrary(
-      sortGamesInLibrary(gameList, sortLibraryBy),
+      sortGamesInLibrary(gameList, sort),
       search,
       filterLibrary,
     );
-  }, [gameList, sortLibraryBy, filterLibrary, search]);
+  }, [gameList, sort, filterLibrary, search]);
+
   return (
     <ul className={classes.gameList}>
       {readyLibrary.map((game) => {
