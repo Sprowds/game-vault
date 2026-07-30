@@ -25,7 +25,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
-      {modalWindowStatus.isActive === true ? (
+      {modalWindowStatus.isOpen === true ? (
         <ModalOverlay
           window={
             modalWindowStatus.modalType === "gameForm" ? (

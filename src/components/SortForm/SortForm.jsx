@@ -1,9 +1,12 @@
 import classes from "./SortForm.module.css";
 import { editSortLibraryBy } from "../../store/librarySlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SortForm = () => {
   const dispatch = useDispatch();
+
+  const currentSort = useSelector((state) => state.library.sortLibraryBy);
+
   return (
     <form
       className={classes.sortForm}
@@ -19,7 +22,7 @@ const SortForm = () => {
           type="radio"
           name="sort"
           className={classes.criterion}
-          defaultChecked
+          checked={currentSort === "name"}
         />
         <label htmlFor="sortByName" className={classes.criterion__title}>
           By name
@@ -32,6 +35,7 @@ const SortForm = () => {
           type="radio"
           name="sort"
           className={classes.criterion}
+          checked={currentSort === "rating"}
         />
         <label htmlFor="sortByRating" className={classes.criterion__title}>
           By rating<span>(best first)</span>

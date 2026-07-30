@@ -36,7 +36,7 @@ const GameCard = memo(({ gameData }) => {
           func={() => {
             dispatch(
               openLibraryModal({
-                action: true,
+                isOpen: true,
                 modalType: "deleteConfirmationForm",
                 data: gameData.id,
               }),
@@ -49,7 +49,7 @@ const GameCard = memo(({ gameData }) => {
           func={() => {
             dispatch(
               openLibraryModal({
-                action: true,
+                isOpen: true,
                 modalType: "gameForm",
                 data: { mode: "edit", game: gameData },
               }),

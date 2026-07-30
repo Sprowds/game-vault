@@ -4,7 +4,14 @@ export const localStorageMiddleware = (store) => (next) => (action) => {
   const result = next(action);
 
   const state = store.getState().library;
-  if (action.type.startsWith(`library/`)) {
+
+  const gameListActions = [
+    `library/addNewGame`,
+    `library/editGame`,
+    `library/deleteGameById`,
+  ];
+
+  if (gameListActions.includes(action.type)) {
     saveLibrary(state.gameList);
   }
 

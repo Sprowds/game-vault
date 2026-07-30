@@ -24,7 +24,7 @@ const LibraryPage = () => {
             onClick={() => {
               dispatch(
                 openLibraryModal({
-                  action: true,
+                  isOpen: true,
                   modalType: "gameForm",
                   data: { mode: "add", game: INITIAL_NEW_GAME },
                 }),

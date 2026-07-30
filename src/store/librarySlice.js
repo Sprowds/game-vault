@@ -62,16 +62,15 @@ const librarySlice = createSlice({
     deleteGameById(state, action) {
       // Удаление игры по её id
       const gameId = action.payload;
-      const index = state.gameList.findIndex((item) => item.id === gameId);
 
-      state.gameList.splice(index, 1);
+      state.gameList = state.gameList.filter((game) => game.id !== gameId);
     },
     openLibraryModal(state, action) {
       // Открытие модального окна библиотеки
-      const { action: isActive, modalType, data } = action.payload;
-      state.modal = { isActive, modalType };
+      const { isOpen, modalType, data } = action.payload;
+      state.modal = { isOpen, modalType };
 
-      if (isActive) {
+      if (isOpen) {
         if (modalType === "gameForm") {
           state.gameForm = {
             mode: data.mode,
@@ -80,10 +79,10 @@ const librarySlice = createSlice({
         } else if (modalType === "deleteConfirmationForm") {
           state.deleteConfirmationForm = { gameId: data };
         } else {
-          throw new Error("Not correct modal type");
+          console.warn("Not correct modal type");
         }
       } else {
-        throw new Error("Not correct value of isActive");
+        console.warn("Not correct value of isActive");
       }
     },
     closeLibraryModal(state) {

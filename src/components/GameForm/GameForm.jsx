@@ -36,7 +36,6 @@ const GameForm = ({ mode, initialGame }) => {
       setFieldErrors(validation);
     } else {
       setFieldErrors([]);
-      console.log(mode);
       if (mode === "add") dispatch(addNewGame(newGame));
       if (mode === "edit") dispatch(editGame(newGame));
       dispatch(closeLibraryModal());
