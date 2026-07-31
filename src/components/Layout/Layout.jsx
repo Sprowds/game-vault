@@ -6,6 +6,7 @@ import GameForm from "../GameForm/GameForm";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import DeleteConfirmationForm from "../DeleteConfirmationForm/DeleteConfirmationForm";
 import { useSelector } from "react-redux";
+import Footer from "../Footer/Footer";
 
 const Layout = () => {
   const modalWindowStatus = useSelector((state) => state.library.modal);
@@ -25,6 +26,7 @@ const Layout = () => {
           </div>
         </div>
       </div>
+      <Footer />
       {modalWindowStatus.isOpen === true ? (
         <ModalOverlay
           window={

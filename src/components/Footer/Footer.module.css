@@ -1,0 +1,44 @@
+.footer {
+  padding-top: 50px;
+  padding-bottom: 10px;
+
+  background-color: #000;
+}
+
+.footer__inner {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.logo span {
+  color: var(--success-color);
+}
+
+.logo:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.contacts {
+  display: flex;
+  gap: 30px;
+
+  font-weight: 700;
+}
+
+.contacts__link:hover {
+  transition: 0.2s;
+  color: #cdbebe;
+}
+
+.copy {
+  margin-top: 10px;
+
+  color: #cdbebe;
+  text-align: center;
+}
